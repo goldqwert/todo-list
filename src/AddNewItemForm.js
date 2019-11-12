@@ -8,7 +8,7 @@ class TodoListHeader extends React.Component {
         title: ''
     }
 
-    onAddTaskButtonClick = () => {
+    onAddItemButtonClick = () => {
         let newText = this.state.title;
         if (newText === "") {
             this.setState({
@@ -20,7 +20,7 @@ class TodoListHeader extends React.Component {
                 title: ''
             })
         }
-        this.props.addTask(newText);
+        this.props.addItem(newText);
     }
 
     onChangeErrorClick = () => {
@@ -31,7 +31,7 @@ class TodoListHeader extends React.Component {
 
     changeOnKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.onAddTaskButtonClick()
+            this.onAddItemButtonClick()
         }
     }
 
@@ -48,13 +48,12 @@ class TodoListHeader extends React.Component {
 
         return (
             <div className="todoList-header">
-                <h3 className="todoList-header__title">What to Learn</h3>
                 <div className="todoList-newTaskForm">
                     <input type="text" placeholder="New task name" onKeyPress={this.changeOnKeyPress} onChange={this.onChangeErrorClick}
                         className={classForError}
                         value={this.state.title}
                         onChange={this.changeValueTitle} />
-                    <button onClick={this.onAddTaskButtonClick}>Add</button>
+                    <button onClick={this.onAddItemButtonClick}>Add</button>
                 </div>
             </div>
         );

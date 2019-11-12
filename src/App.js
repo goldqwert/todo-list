@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
-import TodoListHeader from './TodoListHeader';
-import TodoListTasks from './TodoListTasks';
-import TodoListFooter from './TodoListFooter';
+import TodoList from './TodoList';
+import AddNewItemForm from './AddNewItemForm'
 
 class App extends React.Component {
 
@@ -14,106 +13,65 @@ class App extends React.Component {
 
         let stateAsString = JSON.stringify(this.state);
 
-        localStorage.setItem('our-state', stateAsString);
+        localStorage.setItem('todolists', stateAsString);
     }
 
     restoreState = () => {
         let state = {
-            tasks: [],
-            filterValue: 'All'
+            todolists: []
         };
 
-        let stateAsString = localStorage.getItem('our-state');
+        let stateAsString = localStorage.getItem('todolists');
 
         if (stateAsString != null) {
             state = JSON.parse(stateAsString);
         }
 
         this.setState(state, () => {
-            this.state.tasks.forEach(el => {
-                if (el.id <= this.nextTaskId) {
-                    this.nextTaskId = el.id + 1;
+            this.state.todolists.forEach(el => {
+                if (el.id <= this.nextTodoListId) {
+                    this.nextTodoListId = el.id + 1;
                 }
             });
         })
     }
 
-    nextTaskId = 0;
-
     state = {
-        tasks: [],
-        filterValue: 'All'
-    };
+        todolists: []
+    }
 
-    addTask = (argument) => {
+    nextTodoListId = 0;
 
-        let newTask = {
-            id: this.nextTaskId,
-            title: argument,
-            isDone: false,
-            priority: 'low'
+
+    onAddTodoListClick = (title) => {
+        let newTodoList = {
+            id: this.nextTodoListId,
+            title: title
         }
 
-        this.nextTaskId++;
-        let newTasksObj = [...this.state.tasks, newTask];
+        this.nextTodoListId++;
+        let newTodoListObj = [...this.state.todolists, newTodoList];
 
         this.setState({
-            tasks: newTasksObj
+            todolists: newTodoListObj
         }, () => {
             this.saveState()
         });
     }
-
-    changeFilter = (newFilterValue) => {
-        this.setState({
-            filterValue: newFilterValue
-        }, () => {
-            this.saveState()
-        })
-    }
-
-    changeTask = (taskId, obj) => {
-        let newTasks = this.state.tasks.map((el) => {
-            if (el.id == taskId) {
-                return { ...el, ...obj }
-            } else {
-                return el
-            }
-        })
-        this.setState({
-            tasks: newTasks
-        }, () => {
-            this.saveState();
-        });
-    }
-
-    changeStatus = (taskId, isDone) => {
-        this.changeTask(taskId, { isDone: isDone });
-    }
-
-    changeTitle = (taskId, title) => {
-        this.changeTask(taskId, { title: title });
-    }
-
 
     render = () => {
+
+        const todolists = this.state.todolists.map((el) => <TodoList id={el.id} title={el.title} />)
+
         return (
-            <div className="App">
-                <div className="todoList">
-                    <TodoListHeader addTask={this.addTask} />
-                    <TodoListTasks changeStatus={this.changeStatus}
-                        changeTitle={this.changeTitle}
-                        tasks={this.state.tasks.filter(t => {
-                            switch (this.state.filterValue) {
-                                case 'All': return true;
-                                case 'Completed': return t.isDone;
-                                case 'Active': return !t.isDone;
-                                default: return true;
-                            }
-                        })} />
-                    <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
+            <>
+                <div>
+                    <AddNewItemForm addItem={this.onAddTodoListClick} />
                 </div>
-            </div>
+                <div className="App">
+                    {todolists}
+                </div >
+            </>
         );
     }
 }
