@@ -2,39 +2,9 @@ import React from 'react';
 import './App.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm'
+import { connect } from 'react-redux'
 
 class App extends React.Component {
-
-    componentDidMount() {
-        this.restoreState();
-    }
-
-    saveState = () => {
-
-        let stateAsString = JSON.stringify(this.state);
-
-        localStorage.setItem('todolists', stateAsString);
-    }
-
-    restoreState = () => {
-        let state = {
-            todolists: []
-        };
-
-        let stateAsString = localStorage.getItem('todolists');
-
-        if (stateAsString != null) {
-            state = JSON.parse(stateAsString);
-        }
-
-        this.setState(state, () => {
-            this.state.todolists.forEach(el => {
-                if (el.id <= this.nextTodoListId) {
-                    this.nextTodoListId = el.id + 1;
-                }
-            });
-        })
-    }
 
     state = {
         todolists: []
@@ -44,24 +14,19 @@ class App extends React.Component {
 
 
     onAddTodoListClick = (title) => {
+
         let newTodoList = {
             id: this.nextTodoListId,
-            title: title
-        }
-
-        this.nextTodoListId++;
-        let newTodoListObj = [...this.state.todolists, newTodoList];
-
-        this.setState({
-            todolists: newTodoListObj
-        }, () => {
-            this.saveState()
-        });
+            title: title,
+            tasks: []
+        };
+        this.nextTodoListId++
+        this.props.addTodolist(newTodoList);
     }
 
     render = () => {
 
-        const todolists = this.state.todolists.map((el) => <TodoList id={el.id} title={el.title} />)
+        const todolists = this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)
 
         return (
             <>
@@ -76,5 +41,23 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        todolists: state.todolists
+    }
+}
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTodolist: (newTodolist) => {
+            const action = {
+                type: 'ADD_TODOLIST',
+                newTodolist
+            }
+            dispatch(action);
+        }
+    }
+}
+
+const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
+export default ConnectedApp;
