@@ -60,6 +60,7 @@ class TodoList extends React.Component {
     }
 
     deleteTask = (taskId) => {
+        debugger
         this.props.deleteTask(taskId, this.props.id)
     }
 
@@ -118,6 +119,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action)
         },
         deleteTask(taskId, todolistId) {
+
             const action = {
                 type: 'DELETE_TASK',
                 taskId,

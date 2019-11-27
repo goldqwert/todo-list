@@ -53,7 +53,6 @@ const reducer = (state = initialState, action) => {
                 todolists: state.todolists.filter(el => el.id !== action.todolistId)
             }
         case 'DELETE_TASK':
-            debugger
             return {
                 ...state,
                 todolists: state.todolists.map(el => {
