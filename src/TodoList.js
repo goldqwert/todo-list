@@ -5,6 +5,7 @@ import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
 import TodoListFooter from './TodoListFooter';
 import { connect } from 'react-redux';
+import { addTask, changeTask, deleteTodolist, deleteTask } from './redux/reducer';
 
 class TodoList extends React.Component {
 
@@ -34,16 +35,6 @@ class TodoList extends React.Component {
     }
 
     changeTask = (taskId, obj) => {
-        // let newTasks = this.state.tasks.map((el) => {
-        //     if (el.id == taskId) {
-        //         return { ...el, ...obj }
-        //     } else {
-        //         return el
-        //     }
-        // })
-        // this.setState({
-        //     tasks: newTasks
-        // });
         this.props.changeTask(taskId, obj, this.props.id)
     }
 
@@ -92,43 +83,43 @@ class TodoList extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addTask(newTask, todolistId) {
-            const action = {
-                type: 'ADD_TASK',
-                newTask,
-                todolistId
-            }
-            dispatch(action)
-        },
-        changeTask(taskId, obj, todolistId) {
-            const action = {
-                type: 'CHANGE_TASK',
-                taskId,
-                obj,
-                todolistId
-            }
-            dispatch(action)
-        },
-        deleteTodolist(todolistId) {
-            const action = {
-                type: 'DETELE_TODOLIST',
-                todolistId
-            }
-            dispatch(action)
-        },
-        deleteTask(taskId, todolistId) {
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addTask(newTask, todolistId) {
+//             const action = {
+//                 type: ADD_TASK,
+//                 newTask,
+//                 todolistId
+//             }
+//             dispatch(action)
+//         },
+//         changeTask(taskId, obj, todolistId) {
+//             const action = {
+//                 type: CHANGE_TASK,
+//                 taskId,
+//                 obj,
+//                 todolistId
+//             }
+//             dispatch(action)
+//         },
+//         deleteTodolist(todolistId) {
+//             const action = {
+//                 type: DETELE_TODOLIST,
+//                 todolistId
+//             }
+//             dispatch(action)
+//         },
+//         deleteTask(taskId, todolistId) {
 
-            const action = {
-                type: 'DELETE_TASK',
-                taskId,
-                todolistId
-            }
-            dispatch(action)
-        }
-    }
-}
+//             const action = {
+//                 type: DELETE_TASK,
+//                 taskId,
+//                 todolistId
+//             }
+//             dispatch(action)
+//         }
+//     }
+// }
 
-const connectedTodolist = connect(null, mapDispatchToProps)(TodoList);
+const connectedTodolist = connect(null, { addTask, changeTask, deleteTodolist, deleteTask })(TodoList);
 export default connectedTodolist;
