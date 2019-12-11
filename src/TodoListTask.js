@@ -3,17 +3,12 @@ import './App.css';
 
 class TodoListTask extends React.Component {
 
-    // constructor(props) {
-    //     super(props)
-    // }
-
-
     state = {
         editMode: false
     }
 
     onChangeStatus = (event) => {
-        let status = event.currentTarget.checked
+        let status = event.currentTarget.checked ? 2 : 0
         this.props.changeStatus(this.props.task.id, status)
     }
 
@@ -39,16 +34,25 @@ class TodoListTask extends React.Component {
 
     render = () => {
 
-        let classForTasks = this.props.task.isDone === true ? 'todoList-task done' : 'todoList-task';
-
+        let classForTasks = this.props.task.status ? 'todoList-task done' : 'todoList-task';
+        debugger
+        let priority = ''
+        switch (this.props.task.priority) {
+            case 0: priority = 'Low'; break;
+            case 1: priority = 'Middle'; break;
+            case 2: priority = 'Hight'; break;
+            case 3: priority = 'Urgently'; break;
+            case 4: priority = 'Later'; break;
+        }
+        debugger
         return (
             <div className="todoList-tasks done">
                 <div className={classForTasks}>
-                    <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.isDone} />
+                    <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
                     {this.state.editMode
                         ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true} value={this.props.task.title} />
                         : <span onClick={this.activateEditMode}>{this.props.task.id} - {this.props.task.title}</span>},
-                        priority: {this.props.task.priority} <button onClick={this.deleteTask}>X</button>
+                        priority: {priority} <button onClick={this.deleteTask}>X</button>
                 </div>
             </div>
         );
