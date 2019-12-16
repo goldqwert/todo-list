@@ -5,15 +5,14 @@ import AddNewItemForm from './AddNewItemForm'
 import { connect } from 'react-redux'
 import { setTodolists, addTodolist } from './redux/reducer';
 import axios from 'axios';
+import { api } from './DAL/api';
 
 class App extends React.Component {
 
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/todo-lists',
-            { withCredentials: true })
-            .then(res => {
-                this.props.setTodolists(res.data)
-            })
+        api.getTodolists().then(res => {
+            this.props.setTodolists(res.data)
+        })
     }
 
     nextTodoListId = 0;
@@ -23,19 +22,13 @@ class App extends React.Component {
     }
 
     onAddTodoListClick = (title) => {
-        axios.post('https://social-network.samuraijs.com/api/1.0/todo-lists',
-            { title },
-            {
-                withCredentials: true,
-                headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-            }).then(res => {
-                let newTodolist = res.data.data.item
-                this.props.addTodolist(newTodolist);
-            })
+        api.addTodolist(title).then(res => {
+            let newTodolist = res.data.data.item
+            this.props.addTodolist(newTodolist);
+        })
     }
 
     render = () => {
-
         const todolists = this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)
         debugger
         return (
@@ -50,6 +43,7 @@ class App extends React.Component {
         );
     }
 }
+
 
 const mapStateToProps = (state) => {
     return {

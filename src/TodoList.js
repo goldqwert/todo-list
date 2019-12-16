@@ -5,20 +5,17 @@ import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
 import TodoListFooter from './TodoListFooter';
 import { connect } from 'react-redux';
-import { setTasks, addTask, changeTask, deleteTodolist, deleteTask } from './redux/reducer';
+import { setTasks, addTask, changeTask, deleteTodolist, deleteTask, changeHeader } from './redux/reducer';
 import axios from 'axios';
+import { api } from './DAL/api';
 
 class TodoList extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/todo-lists/${this.props.id}/tasks`,
-            {
-                withCredentials: true,
-                headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-            }).then(res => {
-                let tasks = res.data.items
-                this.props.setTasks(tasks, this.props.id)
-            })
+        api.getTasks(this.props.id).then(res => {
+            let tasks = res.data.items
+            this.props.setTasks(tasks, this.props.id)
+        })
     }
 
     state = {
@@ -26,11 +23,7 @@ class TodoList extends React.Component {
     };
 
     addItem = (title) => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/todo-lists/${this.props.id}/tasks`,
-            { title }, {
-            withCredentials: true,
-            headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-        }).then(res => {
+        api.addTask(this.props.id, title).then(res => {
             let newTask = res.data.data.item
             this.props.addTask(newTask, this.props.id)
         })
@@ -45,11 +38,7 @@ class TodoList extends React.Component {
     changeTask = (taskId, obj) => {
         let task = this.props.tasks.find(el => el.id === taskId);
         const newTask = { ...task, ...obj }
-        axios.put('https://social-network.samuraijs.com/api/1.0/todo-lists/tasks/',
-            newTask, {
-            withCredentials: true,
-            headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-        }).then(res => {
+        api.changeTask(newTask).then(res => {
             this.props.changeTask(taskId, obj, this.props.id)
         })
     }
@@ -62,21 +51,21 @@ class TodoList extends React.Component {
         this.changeTask(taskId, { title });
     }
 
+    changeHeaderTitle = (title) => {
+        api.changeHeader(this.props.id, title).then(res => {
+            this.props.changeHeader(this.props.id, { title: title })
+        })
+    }
+
     deleteTodolist = () => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/todo-lists/${this.props.id}`, {
-            withCredentials: true,
-            headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-        }).then(res => {
+        api.deleteTodolist(this.props.id).then(res => {
             this.props.deleteTodolist(this.props.id)
         })
 
     }
 
     deleteTask = (taskId) => {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/todo-lists/tasks/${taskId}`, {
-            withCredentials: true,
-            headers: { 'API-KEY': 'f332bdcd-3ece-401c-ac40-75a75b80124b' }
-        }).then(res => {
+        api.deleteTask(taskId).then(res => {
             this.props.deleteTask(taskId, this.props.id)
         })
     }
@@ -88,7 +77,8 @@ class TodoList extends React.Component {
                 <div className="todoList">
                     <div className='todoList-header'>
                         <TodoListTitle title={this.props.title}
-                            deleteTodolist={this.deleteTodolist} />
+                            deleteTodolist={this.deleteTodolist} changeHeaderTitle={this.changeHeaderTitle}
+                            id={this.props.id} />
                         <AddNewItemForm addItem={this.addItem} />
                     </div>
                     <TodoListTasks changeStatus={this.changeStatus}
@@ -112,5 +102,5 @@ class TodoList extends React.Component {
     }
 }
 
-const connectedTodolist = connect(null, { setTasks, addTask, changeTask, deleteTodolist, deleteTask })(TodoList);
+const connectedTodolist = connect(null, { setTasks, addTask, changeTask, deleteTodolist, deleteTask, changeHeader })(TodoList);
 export default connectedTodolist;
