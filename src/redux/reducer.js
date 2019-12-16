@@ -1,3 +1,5 @@
+import { api } from '../DAL/api'
+
 export const SET_TODOLISTS = 'Todolist/reducer/SET_TODOLISTS'
 export const ADD_TODOLIST = 'Todolist/reducer/ADD_TODOLIST'
 export const SET_TASKS = 'Todolist/reducer/SET_TASKS'
@@ -78,7 +80,6 @@ const reducer = (state = initialState, action) => {
                     }
                 })
             }
-            debugger
         case DETELE_TODOLIST:
             return {
                 ...state,
@@ -102,6 +103,7 @@ const reducer = (state = initialState, action) => {
     return state
 }
 
+
 export default reducer;
 
 export const setTodolists = (todolists) => ({ type: SET_TODOLISTS, todolists })
@@ -112,3 +114,77 @@ export const changeTask = (taskId, obj, todolistId) => ({ type: CHANGE_TASK, tas
 export const changeHeader = (todolistId, title) => ({ type: CHANGE_HEADER, todolistId, title })
 export const deleteTodolist = (todolistId) => ({ type: DETELE_TODOLIST, todolistId })
 export const deleteTask = (taskId, todolistId) => ({ type: DELETE_TASK, taskId, todolistId })
+
+export const getTodolistsTC = () => {
+    return (dispatch) => {
+        api.getTodolists().then(res => {
+            dispatch(setTodolists(res.data))
+        })
+    }
+}
+
+export const addTodolistTC = (title) => {
+    return (dispatch) => {
+        api.addTodolist(title).then(res => {
+            let newTodolist = res.data.data.item
+            dispatch(addTodolist(newTodolist));
+        })
+    }
+}
+
+export const getTasksTC = (todolistId) => {
+    return (dispatch) => {
+        api.getTasks(todolistId).then(res => {
+            let tasks = res.data.items
+            dispatch(setTasks(tasks, todolistId));
+        })
+    }
+}
+
+export const addTaskTC = (todolistId, title) => {
+    return (dispatch) => {
+        api.addTask(todolistId, title).then(res => {
+            let newTask = res.data.data.item
+            dispatch(addTask(newTask, todolistId))
+        })
+    }
+}
+
+export const changeTaskTC = (taskId, obj, todolistId) => {
+    return (dispatch, getState) => {
+        getState()
+            .todolists.find(el => el.id === todolistId)
+            .tasks.forEach(el => {
+                const newTask = { ...el, ...obj }
+                api.changeTask(newTask).then(res => {
+                    dispatch(changeTask(taskId, obj, todolistId))
+                })
+            });
+
+    }
+}
+
+export const changeHeaderTC = (todolistId, title) => {
+    return (dispatch) => {
+        api.changeHeader(todolistId, title).then(res => {
+            dispatch(changeHeader(todolistId, title))
+        })
+    }
+}
+
+export const deleteTodolistTC = (todolistId) => {
+    return (dispatch) => {
+        api.deleteTodolist(todolistId).then(res => {
+            dispatch(deleteTodolist(todolistId))
+        })
+    }
+}
+
+export const deleteTaskTC = (taskId, todolistId) => {
+    return (dispatch) => {
+        api.deleteTask(taskId).then(res => {
+            dispatch(deleteTask(taskId, todolistId))
+        })
+    }
+}
+

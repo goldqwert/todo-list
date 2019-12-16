@@ -3,16 +3,13 @@ import './App.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm'
 import { connect } from 'react-redux'
-import { setTodolists, addTodolist } from './redux/reducer';
-import axios from 'axios';
+import { getTodolistsTC, addTodolistTC } from './redux/reducer';
 import { api } from './DAL/api';
 
 class App extends React.Component {
 
     componentDidMount() {
-        api.getTodolists().then(res => {
-            this.props.setTodolists(res.data)
-        })
+        this.props.getTodolistsTC()
     }
 
     nextTodoListId = 0;
@@ -22,10 +19,7 @@ class App extends React.Component {
     }
 
     onAddTodoListClick = (title) => {
-        api.addTodolist(title).then(res => {
-            let newTodolist = res.data.data.item
-            this.props.addTodolist(newTodolist);
-        })
+        this.props.addTodolistTC(title)
     }
 
     render = () => {
@@ -51,5 +45,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-const ConnectedApp = connect(mapStateToProps, { setTodolists, addTodolist })(App);
+const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC })(App);
 export default ConnectedApp;

@@ -5,17 +5,12 @@ import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
 import TodoListFooter from './TodoListFooter';
 import { connect } from 'react-redux';
-import { setTasks, addTask, changeTask, deleteTodolist, deleteTask, changeHeader } from './redux/reducer';
-import axios from 'axios';
-import { api } from './DAL/api';
+import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from './redux/reducer';
 
 class TodoList extends React.Component {
 
     componentDidMount() {
-        api.getTasks(this.props.id).then(res => {
-            let tasks = res.data.items
-            this.props.setTasks(tasks, this.props.id)
-        })
+        this.props.getTasksTC(this.props.id)
     }
 
     state = {
@@ -23,10 +18,7 @@ class TodoList extends React.Component {
     };
 
     addItem = (title) => {
-        api.addTask(this.props.id, title).then(res => {
-            let newTask = res.data.data.item
-            this.props.addTask(newTask, this.props.id)
-        })
+        this.props.addTaskTC(this.props.id, title)
     }
 
     changeFilter = (newFilterValue) => {
@@ -36,11 +28,7 @@ class TodoList extends React.Component {
     }
 
     changeTask = (taskId, obj) => {
-        let task = this.props.tasks.find(el => el.id === taskId);
-        const newTask = { ...task, ...obj }
-        api.changeTask(newTask).then(res => {
-            this.props.changeTask(taskId, obj, this.props.id)
-        })
+        this.props.changeTaskTC(taskId, obj, this.props.id)
     }
 
     changeStatus = (taskId, status) => {
@@ -52,22 +40,15 @@ class TodoList extends React.Component {
     }
 
     changeHeaderTitle = (title) => {
-        api.changeHeader(this.props.id, title).then(res => {
-            this.props.changeHeader(this.props.id, { title: title })
-        })
+        this.props.changeHeaderTC(this.props.id, { title })
     }
 
     deleteTodolist = () => {
-        api.deleteTodolist(this.props.id).then(res => {
-            this.props.deleteTodolist(this.props.id)
-        })
-
+        this.props.deleteTodolistTC(this.props.id)
     }
 
     deleteTask = (taskId) => {
-        api.deleteTask(taskId).then(res => {
-            this.props.deleteTask(taskId, this.props.id)
-        })
+        this.props.deleteTaskTC(taskId, this.props.id)
     }
 
     render = () => {
@@ -102,5 +83,5 @@ class TodoList extends React.Component {
     }
 }
 
-const connectedTodolist = connect(null, { setTasks, addTask, changeTask, deleteTodolist, deleteTask, changeHeader })(TodoList);
+const connectedTodolist = connect(null, { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC })(TodoList);
 export default connectedTodolist;
