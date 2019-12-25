@@ -37,9 +37,7 @@ class TodoListTask extends React.Component {
     }
 
     render = () => {
-
         let classForTasks = this.props.task.status ? 'todoList-task done' : 'todoList-task';
-        debugger
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -48,7 +46,6 @@ class TodoListTask extends React.Component {
             case 3: priority = 'Urgently'; break;
             case 4: priority = 'Later'; break;
         }
-        debugger
         return (
             <div className="todoList-tasks done">
                 <div className={classForTasks}>

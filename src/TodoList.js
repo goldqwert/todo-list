@@ -40,7 +40,8 @@ class TodoList extends React.Component {
     }
 
     changeHeaderTitle = (title) => {
-        this.props.changeHeaderTC(this.props.id, { title })
+        debugger
+        this.props.changeHeaderTC(this.props.id, title)
     }
 
     deleteTodolist = () => {

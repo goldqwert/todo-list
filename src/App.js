@@ -3,9 +3,7 @@ import './App.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm'
 import { connect } from 'react-redux'
-import { getTodolistsTC, addTodolistTC } from './redux/reducer';
-import { api } from './DAL/api';
-
+import { getTodolistsTC, addTodolistTC, showTodolists } from './redux/reducer';
 class App extends React.Component {
 
     componentDidMount() {
@@ -22,17 +20,26 @@ class App extends React.Component {
         this.props.addTodolistTC(title)
     }
 
+    showTodolists = () => {
+        this.props.showTodolists()
+    }
+
     render = () => {
-        const todolists = this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)
-        debugger
+        // const todolists = this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)
+
         return (
             <>
-                <div>
-                    <AddNewItemForm addItem={this.onAddTodoListClick} />
-                </div>
-                <div className="App">
-                    {todolists}
-                </div >
+                {!this.props.error
+                    ? <div><div>
+                        <AddNewItemForm addItem={this.onAddTodoListClick} /></div>
+                        <div className="App">
+                            {this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)}
+                        </div >
+                    </div>
+                    : <div>
+                        Maximum count of Todo lists count is 10
+                        <button onClick={this.showTodolists}>Come back</button>
+                    </div>}
             </>
         );
     }
@@ -41,9 +48,10 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        todolists: state.todolists
+        todolists: state.todolists,
+        error: state.error
     }
 }
 
-const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC })(App);
+const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC, showTodolists })(App);
 export default ConnectedApp;

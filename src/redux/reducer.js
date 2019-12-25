@@ -8,9 +8,14 @@ export const CHANGE_TASK = 'Todolist/reducer/CHANGE_TASK'
 export const CHANGE_HEADER = 'Todolist/reducer/CHANGE_HEADER'
 export const DETELE_TODOLIST = 'Todolist/reducer/DETELE_TODOLIST'
 export const DELETE_TASK = 'Todolist/reducer/DELETE_TASK'
+export const SHOW_ERROR = 'Todolist/reducer/SHOW_ERROR'
+export const SHOW_TODOLISTS = 'Todolist/reducer/SHOW_TODOLISTS'
 
 
-const initialState = { todolists: [] }
+const initialState = {
+    todolists: [],
+    error: false
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -43,7 +48,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 todolists: state.todolists.map(el => {
                     if (el.id === action.todolistId) {
-                        return { ...el, tasks: [...el.tasks, action.newTask] }
+                        return { ...el, tasks: [action.newTask, ...el.tasks] }
                     } else {
                         return el;
                     }
@@ -73,6 +78,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 todolists: state.todolists.map(el => {
+                    debugger
                     if (el.id === action.todolistId) {
                         return { ...el, ...action.title }
                     } else {
@@ -99,6 +105,16 @@ const reducer = (state = initialState, action) => {
                     }
                 })
             }
+        case SHOW_ERROR:
+            return {
+                ...state,
+                error: true
+            }
+        case SHOW_TODOLISTS:
+            return {
+                ...state,
+                error: false
+            }
     }
     return state
 }
@@ -114,77 +130,79 @@ export const changeTask = (taskId, obj, todolistId) => ({ type: CHANGE_TASK, tas
 export const changeHeader = (todolistId, title) => ({ type: CHANGE_HEADER, todolistId, title })
 export const deleteTodolist = (todolistId) => ({ type: DETELE_TODOLIST, todolistId })
 export const deleteTask = (taskId, todolistId) => ({ type: DELETE_TASK, taskId, todolistId })
+export const showError = () => ({ type: SHOW_ERROR })
+export const showTodolists = () => ({ type: SHOW_TODOLISTS })
 
 export const getTodolistsTC = () => {
-    return (dispatch) => {
-        api.getTodolists().then(res => {
-            dispatch(setTodolists(res.data))
-        })
+    return async (dispatch) => {
+        const res = await api.getTodolists()
+        dispatch(setTodolists(res.data))
     }
 }
 
 export const addTodolistTC = (title) => {
-    return (dispatch) => {
-        api.addTodolist(title).then(res => {
-            let newTodolist = res.data.data.item
+    return async (dispatch) => {
+        const res = await api.addTodolist(title)
+        console.log(res)
+        let newTodolist = res.data.data.item
+        if (res.data.resultCode === 1) {
+            dispatch(showError())
+        } else {
             dispatch(addTodolist(newTodolist));
-        })
+        }
     }
 }
 
 export const getTasksTC = (todolistId) => {
-    return (dispatch) => {
-        api.getTasks(todolistId).then(res => {
-            let tasks = res.data.items
-            dispatch(setTasks(tasks, todolistId));
-        })
+    debugger
+    return async (dispatch) => {
+        const res = await api.getTasks(todolistId)
+        let tasks = res.data.items
+        dispatch(setTasks(tasks, todolistId));
     }
 }
 
 export const addTaskTC = (todolistId, title) => {
-    return (dispatch) => {
-        api.addTask(todolistId, title).then(res => {
-            let newTask = res.data.data.item
-            dispatch(addTask(newTask, todolistId))
-        })
+    return async (dispatch) => {
+        const res = await api.addTask(todolistId, title)
+        let newTask = res.data.data.item
+        dispatch(addTask(newTask, todolistId))
     }
 }
 
 export const changeTaskTC = (taskId, obj, todolistId) => {
     return (dispatch, getState) => {
-        getState()
-            .todolists.find(el => el.id === todolistId)
-            .tasks.forEach(el => {
+        const selectedTodo = getState().todolists.find(el => el.id === todolistId);
+        selectedTodo.tasks.forEach(async el => {
+            debugger
+            if (el.id === taskId) {
                 const newTask = { ...el, ...obj }
-                api.changeTask(newTask).then(res => {
-                    dispatch(changeTask(taskId, obj, todolistId))
-                })
-            });
-
+                const res = await api.changeTask(newTask)
+                dispatch(changeTask(taskId, obj, todolistId))
+            }
+        })
     }
 }
 
 export const changeHeaderTC = (todolistId, title) => {
-    return (dispatch) => {
-        api.changeHeader(todolistId, title).then(res => {
-            dispatch(changeHeader(todolistId, title))
-        })
+    return async (dispatch) => {
+        const res = await api.changeHeader(todolistId, title)
+        dispatch(changeHeader(todolistId, { title }))
     }
 }
 
 export const deleteTodolistTC = (todolistId) => {
-    return (dispatch) => {
-        api.deleteTodolist(todolistId).then(res => {
-            dispatch(deleteTodolist(todolistId))
-        })
+    return async (dispatch) => {
+        const res = await api.deleteTodolist(todolistId)
+        dispatch(deleteTodolist(todolistId))
     }
 }
 
 export const deleteTaskTC = (taskId, todolistId) => {
-    return (dispatch) => {
-        api.deleteTask(taskId).then(res => {
-            dispatch(deleteTask(taskId, todolistId))
-        })
+    return async (dispatch) => {
+        const res = await api.deleteTask(taskId)
+        dispatch(deleteTask(taskId, todolistId))
     }
 }
+
 

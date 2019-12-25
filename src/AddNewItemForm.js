@@ -10,17 +10,18 @@ class TodoListHeader extends React.Component {
 
     onAddItemButtonClick = () => {
         let newText = this.state.title;
-        if (newText === "") {
+        if (newText === '') {
             this.setState({
-                error: true,
+                error: true
             })
         } else {
             this.setState({
                 error: false,
                 title: ''
             })
+            this.props.addItem(newText);
         }
-        this.props.addItem(newText);
+
     }
 
     onChangeErrorClick = () => {
