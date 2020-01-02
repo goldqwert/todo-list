@@ -1,12 +1,20 @@
 import React from 'react';
 import './App.css';
-import TodoListTitle from './TodoListTitle.tsx';
+import TodoListTitle from './TodoListTitle';
 import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
 import TodoListFooter from './TodoListFooter';
 import { connect } from 'react-redux';
 import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from './redux/reducer';
 
+interface IProps {
+    getTasks: () => void
+    addTaskTC: () => void
+    changeTaskTC: () => void
+    changeHeaderTC: () => void
+    deleteTodolistTC: () => void
+    deleteTaskTC: () => void
+}
 class TodoList extends React.Component {
 
     componentDidMount() {

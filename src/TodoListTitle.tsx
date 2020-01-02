@@ -26,7 +26,7 @@ const TodoListTitle: React.FC<IProps> = ({ title, changeHeaderTitle, deleteTodol
         <div>
             <button onClick={deleteTodolist}>X</button>
             {editMode
-                ? <input onChange={e => setTitle(e.target.value)} autoFocus={true} onBlur={changeHeaderTitle} value={title} />
+                ? <input onChange={e => setTitle(e.target.value)} autoFocus={true} onBlur={deactivateEditMode} value={title} />
                 : <h3 onClick={e => setEditMode(true)} className="todoList-header__title">{title}</h3>
             }
         </div>);

@@ -3,8 +3,17 @@ import './App.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm'
 import { connect } from 'react-redux'
-import { getTodolistsTC, addTodolistTC, showTodolists } from './redux/reducer';
-class App extends React.Component {
+import { getTodolistsTC, addTodolistTC, showTodolistsAC } from './redux/reducer';
+
+interface IProps {
+    getTodolistsTC: () => void
+    addTodolistTC: (title: string) => void
+    showTodolistsAC: () => void
+    error: boolean
+    todolists: any[]
+
+}
+class App extends React.Component<IProps> {
 
     componentDidMount() {
         this.props.getTodolistsTC()
@@ -16,17 +25,15 @@ class App extends React.Component {
         todolists: []
     }
 
-    onAddTodoListClick = (title) => {
+    onAddTodoListClick = (title: string) => {
         this.props.addTodolistTC(title)
     }
 
     showTodolists = () => {
-        this.props.showTodolists()
+        this.props.showTodolistsAC()
     }
 
     render = () => {
-        // const todolists = this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)
-
         return (
             <>
                 {!this.props.error
@@ -46,12 +53,12 @@ class App extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
     return {
         todolists: state.todolists,
         error: state.error
     }
 }
 
-const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC, showTodolists })(App);
+const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC, showTodolistsAC })(App);
 export default ConnectedApp;

@@ -1,4 +1,9 @@
-import { api } from '../DAL/api'
+import { api } from '../DAL/api';
+import {
+    ActionCreatorTypes,
+    setTodolists, addTodolist, setTasks, addTask, changeTask, changeHeader, deleteTodolist, deleteTask, showError,
+    showTodolists
+} from './types'
 
 export const SET_TODOLISTS = 'Todolist/reducer/SET_TODOLISTS'
 export const ADD_TODOLIST = 'Todolist/reducer/ADD_TODOLIST'
@@ -11,13 +16,12 @@ export const DELETE_TASK = 'Todolist/reducer/DELETE_TASK'
 export const SHOW_ERROR = 'Todolist/reducer/SHOW_ERROR'
 export const SHOW_TODOLISTS = 'Todolist/reducer/SHOW_TODOLISTS'
 
-
-const initialState = {
+const initialState: State = {
     todolists: [],
     error: false
 }
 
-const reducer = (state = initialState, action) => {
+const reducer = (state: State = initialState, action: ActionCreatorTypes) => {
     switch (action.type) {
         case SET_TODOLISTS:
             return {
@@ -118,90 +122,86 @@ const reducer = (state = initialState, action) => {
     }
     return state
 }
-
-
 export default reducer;
 
-export const setTodolists = (todolists) => ({ type: SET_TODOLISTS, todolists })
-export const addTodolist = (newTodolist) => ({ type: ADD_TODOLIST, newTodolist })
-export const setTasks = (tasks, todolistId) => ({ type: SET_TASKS, tasks, todolistId })
-export const addTask = (newTask, todolistId) => ({ type: ADD_TASK, newTask, todolistId })
-export const changeTask = (taskId, obj, todolistId) => ({ type: CHANGE_TASK, taskId, obj, todolistId })
-export const changeHeader = (todolistId, title) => ({ type: CHANGE_HEADER, todolistId, title })
-export const deleteTodolist = (todolistId) => ({ type: DETELE_TODOLIST, todolistId })
-export const deleteTask = (taskId, todolistId) => ({ type: DELETE_TASK, taskId, todolistId })
-export const showError = () => ({ type: SHOW_ERROR })
-export const showTodolists = () => ({ type: SHOW_TODOLISTS })
+const setTodolistsAC = (todolists: any[]): setTodolists => ({ type: SET_TODOLISTS, todolists })
+const addTodolistAC = (newTodolist: any[]): addTodolist => ({ type: ADD_TODOLIST, newTodolist })
+const setTasksAC = (tasks: any[], todolistId: string): setTasks => ({ type: SET_TASKS, tasks, todolistId })
+const addTaskAC = (newTask: string, todolistId: string): addTask => ({ type: ADD_TASK, newTask, todolistId })
+const changeTaskAC = (taskId: string, obj: any, todolistId: string): changeTask => ({ type: CHANGE_TASK, taskId, obj, todolistId })
+const changeHeaderAC = (todolistId: string, title: string): changeHeader => ({ type: CHANGE_HEADER, todolistId, title })
+const deleteTodolistAC = (todolistId: string): deleteTodolist => ({ type: DETELE_TODOLIST, todolistId })
+const deleteTaskAC = (taskId: string, todolistId: string): deleteTask => ({ type: DELETE_TASK, taskId, todolistId })
+const showErrorAC = (): showError => ({ type: SHOW_ERROR })
+export const showTodolistsAC = (): showTodolists => ({ type: SHOW_TODOLISTS })
 
 export const getTodolistsTC = () => {
-    return async (dispatch) => {
-        const res = await api.getTodolists()
-        dispatch(setTodolists(res.data))
+    return async (dispatch: Function) => {
+        const res: any = await api.getTodolists()
+        dispatch(setTodolistsAC(res.data))
     }
 }
-
-export const addTodolistTC = (title) => {
-    return async (dispatch) => {
+export const addTodolistTC = (title: string) => {
+    return async (dispatch: Function) => {
         const res = await api.addTodolist(title)
         console.log(res)
         let newTodolist = res.data.data.item
         if (res.data.resultCode === 1) {
-            dispatch(showError())
+            dispatch(showErrorAC())
         } else {
-            dispatch(addTodolist(newTodolist));
+            dispatch(addTodolistAC(newTodolist));
         }
     }
 }
 
-export const getTasksTC = (todolistId) => {
+export const getTasksTC = (todolistId: string) => {
     debugger
-    return async (dispatch) => {
+    return async (dispatch: Function) => {
         const res = await api.getTasks(todolistId)
         let tasks = res.data.items
-        dispatch(setTasks(tasks, todolistId));
+        dispatch(setTasksAC(tasks, todolistId));
     }
 }
 
-export const addTaskTC = (todolistId, title) => {
-    return async (dispatch) => {
+export const addTaskTC = (todolistId: string, title: string) => {
+    return async (dispatch: Function) => {
         const res = await api.addTask(todolistId, title)
         let newTask = res.data.data.item
-        dispatch(addTask(newTask, todolistId))
+        dispatch(addTaskAC(newTask, todolistId))
     }
 }
 
-export const changeTaskTC = (taskId, obj, todolistId) => {
-    return (dispatch, getState) => {
+export const changeTaskTC = (taskId: string, obj: any, todolistId: string) => {
+    return (dispatch: Function, getState: Function) => {
         const selectedTodo = getState().todolists.find(el => el.id === todolistId);
         selectedTodo.tasks.forEach(async el => {
-            debugger
             if (el.id === taskId) {
                 const newTask = { ...el, ...obj }
                 const res = await api.changeTask(newTask)
-                dispatch(changeTask(taskId, obj, todolistId))
+                dispatch(changeTaskAC(taskId, obj, todolistId))
             }
         })
     }
 }
 
-export const changeHeaderTC = (todolistId, title) => {
-    return async (dispatch) => {
+export const changeHeaderTC = (todolistId: string, title: string) => {
+    return async (dispatch: Function) => {
         const res = await api.changeHeader(todolistId, title)
-        dispatch(changeHeader(todolistId, { title }))
+        dispatch(changeHeaderAC(todolistId, { title }))
     }
 }
 
-export const deleteTodolistTC = (todolistId) => {
-    return async (dispatch) => {
+export const deleteTodolistTC = (todolistId: string) => {
+    return async (dispatch: Function) => {
         const res = await api.deleteTodolist(todolistId)
-        dispatch(deleteTodolist(todolistId))
+        dispatch(deleteTodolistAC(todolistId))
     }
 }
 
-export const deleteTaskTC = (taskId, todolistId) => {
-    return async (dispatch) => {
+export const deleteTaskTC = (taskId: string, todolistId: string) => {
+    return async (dispatch: Function) => {
         const res = await api.deleteTask(taskId)
-        dispatch(deleteTask(taskId, todolistId))
+        dispatch(deleteTaskAC(taskId, todolistId))
     }
 }
 

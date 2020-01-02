@@ -1,7 +1,11 @@
 import React from 'react';
 import './App.css';
 
-class TodoListHeader extends React.Component {
+interface IProps {
+    addItem: (newText: string) => void
+}
+
+class TodoListHeader extends React.Component<IProps> {
 
     state = {
         error: false,
