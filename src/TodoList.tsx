@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TodoListTitle from './TodoListTitle';
+import TodoListTitle from './TodoListTitle.tsx';
 import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
 import TodoListFooter from './TodoListFooter';
