@@ -129,7 +129,7 @@ const addTodolistAC = (newTodolist: any[]): addTodolist => ({ type: ADD_TODOLIST
 const setTasksAC = (tasks: any[], todolistId: string): setTasks => ({ type: SET_TASKS, tasks, todolistId })
 const addTaskAC = (newTask: string, todolistId: string): addTask => ({ type: ADD_TASK, newTask, todolistId })
 const changeTaskAC = (taskId: string, obj: any, todolistId: string): changeTask => ({ type: CHANGE_TASK, taskId, obj, todolistId })
-const changeHeaderAC = (todolistId: string, title: string): changeHeader => ({ type: CHANGE_HEADER, todolistId, title })
+const changeHeaderAC = (todolistId: string, title: any): changeHeader => ({ type: CHANGE_HEADER, todolistId, title })
 const deleteTodolistAC = (todolistId: string): deleteTodolist => ({ type: DETELE_TODOLIST, todolistId })
 const deleteTaskAC = (taskId: string, todolistId: string): deleteTask => ({ type: DELETE_TASK, taskId, todolistId })
 const showErrorAC = (): showError => ({ type: SHOW_ERROR })
@@ -173,8 +173,8 @@ export const addTaskTC = (todolistId: string, title: string) => {
 
 export const changeTaskTC = (taskId: string, obj: any, todolistId: string) => {
     return (dispatch: Function, getState: Function) => {
-        const selectedTodo = getState().todolists.find(el => el.id === todolistId);
-        selectedTodo.tasks.forEach(async el => {
+        const selectedTodo = getState().todolists.find((el: Task) => el.id === todolistId);
+        selectedTodo.tasks.forEach(async (el: Task) => {
             if (el.id === taskId) {
                 const newTask = { ...el, ...obj }
                 const res = await api.changeTask(newTask)

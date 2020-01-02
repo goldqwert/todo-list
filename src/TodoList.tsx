@@ -8,14 +8,17 @@ import { connect } from 'react-redux';
 import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from './redux/reducer';
 
 interface IProps {
-    getTasks: () => void
-    addTaskTC: () => void
-    changeTaskTC: () => void
-    changeHeaderTC: () => void
-    deleteTodolistTC: () => void
-    deleteTaskTC: () => void
+    id: string
+    title: string
+    tasks: any[]
+    getTasksTC: (id: string) => void
+    addTaskTC: (id: string, title: string) => void
+    changeTaskTC: (taskId: string, obj: any, id: string) => void
+    changeHeaderTC: (id: string, title: string) => void
+    deleteTodolistTC: (id: string) => void
+    deleteTaskTC: (taskId: string, id: string) => void
 }
-class TodoList extends React.Component {
+class TodoList extends React.Component<IProps> {
 
     componentDidMount() {
         this.props.getTasksTC(this.props.id)
@@ -25,30 +28,29 @@ class TodoList extends React.Component {
         filterValue: 'All'
     };
 
-    addItem = (title) => {
+    addItem = (title: string) => {
         this.props.addTaskTC(this.props.id, title)
     }
 
-    changeFilter = (newFilterValue) => {
+    changeFilter = (newFilterValue: string) => {
         this.setState({
             filterValue: newFilterValue
         })
     }
 
-    changeTask = (taskId, obj) => {
+    changeTaskTC = (taskId: string, obj: string | number) => {
         this.props.changeTaskTC(taskId, obj, this.props.id)
     }
 
-    changeStatus = (taskId, status) => {
-        this.changeTask(taskId, { status });
+    changeStatus = (taskId: string, status: number) => {
+        this.changeTaskTC(taskId, { status });
     }
 
-    changeTitle = (taskId, title) => {
-        this.changeTask(taskId, { title });
+    changeTitle = (taskId: string, title: string) => {
+        this.changeTaskTC(taskId, { title });
     }
 
-    changeHeaderTitle = (title) => {
-        debugger
+    changeHeaderTitleTC = (title: string) => {
         this.props.changeHeaderTC(this.props.id, title)
     }
 
@@ -56,7 +58,7 @@ class TodoList extends React.Component {
         this.props.deleteTodolistTC(this.props.id)
     }
 
-    deleteTask = (taskId) => {
+    deleteTaskTC = (taskId: string) => {
         this.props.deleteTaskTC(taskId, this.props.id)
     }
 
@@ -67,13 +69,13 @@ class TodoList extends React.Component {
                 <div className="todoList">
                     <div className='todoList-header'>
                         <TodoListTitle title={this.props.title}
-                            deleteTodolist={this.deleteTodolist} changeHeaderTitle={this.changeHeaderTitle}
+                            deleteTodolist={this.deleteTodolist} changeHeaderTitleTC={this.changeHeaderTitleTC}
                             id={this.props.id} />
                         <AddNewItemForm addItem={this.addItem} />
                     </div>
                     <TodoListTasks changeStatus={this.changeStatus}
                         changeTitle={this.changeTitle}
-                        deleteTask={this.deleteTask}
+                        deleteTask={this.deleteTaskTC}
                         tasks={tasks.filter(t => {
                             if (this.state.filterValue === "All") {
                                 return true;

@@ -34,7 +34,7 @@ export interface changeTask {
 
 export interface changeHeader {
     type: typeof CHANGE_HEADER
-    title: string
+    title: any
     todolistId: string
 }
 

@@ -1,14 +1,20 @@
 import React from 'react';
 import './App.css';
 
-class TodoListTask extends React.Component {
+interface IProps {
+    task: any
+    changeStatus: (id: string, status: number) => void
+    changeTitle: (id: string, title: string) => void
+    deleteTask: (id: string) => void
+}
+class TodoListTask extends React.Component<IProps> {
 
     state = {
         editMode: false,
         title: this.props.task.title
     }
 
-    onChangeStatus = (e) => {
+    onChangeStatus = (e: React.FormEvent<HTMLInputElement>) => {
         let status = e.currentTarget.checked ? 2 : 0
         this.props.changeStatus(this.props.task.id, status)
     }
@@ -26,7 +32,7 @@ class TodoListTask extends React.Component {
         })
     }
 
-    onTitleChanged = (e) => {
+    onTitleChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
             title: e.currentTarget.value
         })

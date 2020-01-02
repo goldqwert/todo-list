@@ -1,36 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 
 interface IProps {
-    changeHeaderTitle: () => void;
-    deleteTodolist: () => void;
-    title: string;
+    title: string
+    id: string
+    deleteTodolist: () => void
+    changeHeaderTitleTC: (title: string) => void
 }
+class TodoListTitle extends React.Component<IProps> {
 
-const TodoListTitle: React.FC<IProps> = ({ title, changeHeaderTitle, deleteTodolist }) => {
-
-    // state = {
-    //     editMode: false,
-    //     title: this.props.title
-    // }
-
-    const [localTitle, setTitle] = useState(title);
-    const [editMode, setEditMode] = useState(false);
-
-    const deactivateEditMode = () => {
-        changeHeaderTitle(localTitle);
-        setEditMode(false);
+    state = {
+        editMode: false,
+        title: this.props.title
     }
 
-    return (
-        <div>
-            <button onClick={deleteTodolist}>X</button>
-            {editMode
-                ? <input onChange={e => setTitle(e.target.value)} autoFocus={true} onBlur={deactivateEditMode} value={title} />
-                : <h3 onClick={e => setEditMode(true)} className="todoList-header__title">{title}</h3>
-            }
-        </div>);
+    activateEditMode = () => {
+        this.setState({
+            editMode: true
+        })
+    }
 
+    deactivateEditMode = () => {
+        this.setState({
+            editMode: false
+        })
+        this.props.changeHeaderTitleTC(this.state.title)
+    }
+
+    changeHeader = (e: React.FormEvent<HTMLInputElement>) => {
+        this.setState({
+            title: e.currentTarget.value
+        })
+    }
+    render = () => {
+        return (
+            <div>
+                <button onClick={this.props.deleteTodolist}>X</button>
+                {this.state.editMode
+                    ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title} />
+                    : <h3 onClick={this.activateEditMode} className="todoList-header__title">{this.props.title}</h3>
+                }</div>);
+    }
 }
 
 export default TodoListTitle;

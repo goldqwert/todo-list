@@ -1,19 +1,23 @@
 import React from 'react';
 import './App.css';
 import TodoList from './TodoList';
-import AddNewItemForm from './AddNewItemForm'
-import { connect } from 'react-redux'
+import AddNewItemForm from './AddNewItemForm';
+import { connect } from 'react-redux';
 import { getTodolistsTC, addTodolistTC, showTodolistsAC } from './redux/reducer';
 
 interface IProps {
     getTodolistsTC: () => void
     addTodolistTC: (title: string) => void
     showTodolistsAC: () => void
-    error: boolean
-    todolists: any[]
-
 }
-class App extends React.Component<IProps> {
+
+interface mapStateToProps {
+    todolists: any[],
+    error: boolean
+}
+
+type AppProps = IProps & mapStateToProps
+class App extends React.Component<AppProps> {
 
     componentDidMount() {
         this.props.getTodolistsTC()
@@ -40,7 +44,7 @@ class App extends React.Component<IProps> {
                     ? <div><div>
                         <AddNewItemForm addItem={this.onAddTodoListClick} /></div>
                         <div className="App">
-                            {this.props.todolists.map((el) => <TodoList id={el.id} title={el.title} tasks={el.tasks} />)}
+                            {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                         </div >
                     </div>
                     : <div>
@@ -53,7 +57,7 @@ class App extends React.Component<IProps> {
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: State): mapStateToProps => {
     return {
         todolists: state.todolists,
         error: state.error

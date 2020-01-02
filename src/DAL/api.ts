@@ -7,29 +7,29 @@ const instance = axios.create({
 });
 
 export const api = {
-    addTodolist(title) {
+    addTodolist(title: string) {
         return instance.post('', { title })
     },
     getTodolists() {
         return instance.get('')
     },
-    getTasks(todolistId) {
+    getTasks(todolistId: string) {
         return instance.get(`/${todolistId}/tasks`)
     },
-    addTask(todolistId, title) {
+    addTask(todolistId: string, title: string) {
         return instance.post(`/${todolistId}/tasks`,
             { title })
     },
-    changeTask(newTask) {
+    changeTask(newTask: string) {
         return instance.put('/tasks/', newTask)
     },
-    deleteTodolist(todolistId) {
+    deleteTodolist(todolistId: string) {
         return instance.delete(`/${todolistId}`)
     },
-    deleteTask(taskId) {
+    deleteTask(taskId: string) {
         return instance.delete(`/tasks/${taskId}`)
     },
-    changeHeader(todolistId, title) {
+    changeHeader(todolistId: string, title: string) {
         return instance.put(`/${todolistId}`, { title })
     }
 }

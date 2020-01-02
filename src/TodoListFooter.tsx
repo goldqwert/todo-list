@@ -1,7 +1,11 @@
 import React from 'react';
 import './App.css';
 
-class TodoListFooter extends React.Component {
+interface IProps {
+    changeFilter: (arg: string) => void
+    filterValue: string
+}
+class TodoListFooter extends React.Component<IProps> {
 
     state = {
         isHidden: true

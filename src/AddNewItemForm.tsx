@@ -28,33 +28,26 @@ class TodoListHeader extends React.Component<IProps> {
 
     }
 
-    onChangeErrorClick = () => {
-        this.setState({
-            error: false
-        })
-    }
-
-    changeOnKeyPress = (e) => {
+    changeOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             this.onAddItemButtonClick()
         }
     }
 
-    changeValueTitle = (event) => {
-        let status = event.currentTarget.value;
+    changeValueTitle = (e: React.FormEvent<HTMLInputElement>) => {
+        let status = e.currentTarget.value;
         this.setState({
-            title: status
+            title: status,
+            error: false
         })
     }
 
     render = () => {
-
         let classForError = this.state.error === true ? 'error' : '';
-
         return (
             <div className="todoList-header">
                 <div className="todoList-newTaskForm">
-                    <input type="text" placeholder="New task name" onKeyPress={this.changeOnKeyPress} onChange={this.onChangeErrorClick}
+                    <input type="text" placeholder="New task name" onKeyPress={this.changeOnKeyPress}
                         className={classForError}
                         value={this.state.title}
                         onChange={this.changeValueTitle} />
