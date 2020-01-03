@@ -10,14 +10,16 @@ import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, ch
 interface IProps {
     id: string
     title: string
-    tasks: any[]
+    tasks: Task[]
     getTasksTC: (id: string) => void
     addTaskTC: (id: string, title: string) => void
-    changeTaskTC: (taskId: string, obj: any, id: string) => void
+    changeTaskTC: (taskId: string, obj: IChangeTask, id: string) => void
     changeHeaderTC: (id: string, title: string) => void
     deleteTodolistTC: (id: string) => void
     deleteTaskTC: (taskId: string, id: string) => void
 }
+
+
 class TodoList extends React.Component<IProps> {
 
     componentDidMount() {
@@ -38,7 +40,7 @@ class TodoList extends React.Component<IProps> {
         })
     }
 
-    changeTaskTC = (taskId: string, obj: string | number) => {
+    changeTaskTC = (taskId: string, obj: IChangeTask) => {
         this.props.changeTaskTC(taskId, obj, this.props.id)
     }
 

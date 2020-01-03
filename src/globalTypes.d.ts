@@ -21,3 +21,11 @@ interface State {
     todolists: Todolist[]
     error: boolean
 }
+interface IChangeTask {
+    status?: number
+    title?: string
+}
+
+interface IChangeTitle {
+    title: string
+}
