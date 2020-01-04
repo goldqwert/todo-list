@@ -3,6 +3,8 @@ import './App.css';
 
 interface IProps {
     addItem: (newText: string) => void
+    style: string
+    placeholder: string
 }
 
 class TodoListHeader extends React.Component<IProps> {
@@ -35,24 +37,27 @@ class TodoListHeader extends React.Component<IProps> {
     }
 
     changeValueTitle = (e: React.FormEvent<HTMLInputElement>) => {
-        let status = e.currentTarget.value;
-        this.setState({
-            title: status,
-            error: false
-        })
+        if (e.currentTarget.value.length > 100) {
+            this.setState({
+                error: true
+            })
+        } else {
+            this.setState({
+                title: e.currentTarget.value,
+                error: false
+            })
+        }
     }
 
     render = () => {
         let classForError = this.state.error === true ? 'error' : '';
         return (
-            <div className="todoList-header">
-                <div className="todoList-newTaskForm">
-                    <input type="text" placeholder="New task name" onKeyPress={this.changeOnKeyPress}
-                        className={classForError}
-                        value={this.state.title}
-                        onChange={this.changeValueTitle} />
-                    <button onClick={this.onAddItemButtonClick}>Add</button>
-                </div>
+            <div className={this.props.style}>
+                <input type="text" placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
+                    className={classForError}
+                    value={this.state.title}
+                    onChange={this.changeValueTitle} />
+                <button onClick={this.onAddItemButtonClick}>ADD</button>
             </div>
         );
     }

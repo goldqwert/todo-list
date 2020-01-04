@@ -11,7 +11,8 @@ class TodoListTask extends React.Component<IProps> {
 
     state = {
         editMode: false,
-        title: this.props.task.title
+        title: this.props.task.title,
+        error: false
     }
 
     onChangeStatus = (e: React.FormEvent<HTMLInputElement>) => {
@@ -55,11 +56,15 @@ class TodoListTask extends React.Component<IProps> {
         return (
             <div className="todoList-tasks done">
                 <div className={classForTasks}>
-                    <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
+
                     {this.state.editMode
-                        ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true} value={this.state.title} />
-                        : <span onClick={this.activateEditMode}>{this.props.task.title}</span>},
-                        priority: {priority} <button onClick={this.deleteTask}>X</button>
+                        ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
+                            value={this.state.title} />
+                        : <div><input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
+                            <span onClick={this.activateEditMode} className='border'>{this.props.task.title}</span>
+                        </div>}
+                    priority: {priority} <button onClick={this.deleteTask}>X</button>
+                    <hr />
                 </div>
             </div>
         );

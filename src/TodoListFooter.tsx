@@ -29,13 +29,13 @@ class TodoListFooter extends React.Component<IProps> {
 
         return (
             <div className="todoList-footer">
-                {this.state.isHidden && <div>
-                    <button onClick={this.onAllFilterClick} className={classForAll}>All</button>
-                    <button onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</button>
-                    <button onClick={this.onActiveFilterClick} className={classForActive}>Active</button>
-                </div>}
-                {!this.state.isHidden && <span onClick={() => { this.setState({ isHidden: true }) }}>Hide</span>}
-                {this.state.isHidden && <span onClick={() => { this.setState({ isHidden: false }) }}>Show</span>}
+                {this.state.isHidden && <>
+                    <div onClick={this.onAllFilterClick} className={classForAll}>All</div>
+                    <div onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</div>
+                    <div onClick={this.onActiveFilterClick} className={classForActive}>Active</div>
+                </>}
+                {!this.state.isHidden && <div className='todoList_hide' onClick={() => { this.setState({ isHidden: true }) }}>Show</div>}
+                {this.state.isHidden && <div className='todoList_show' onClick={() => { this.setState({ isHidden: false }) }}>Hide</div>}
             </div>
         );
     }

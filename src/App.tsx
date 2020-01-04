@@ -41,8 +41,8 @@ class App extends React.Component<AppProps> {
         return (
             <>
                 {!this.props.error
-                    ? <div><div>
-                        <AddNewItemForm addItem={this.onAddTodoListClick} /></div>
+                    ? <div>
+                        <div><AddNewItemForm addItem={this.onAddTodoListClick} style='todo2' placeholder='New To-do list name' /></div>
                         <div className="App">
                             {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                         </div >

@@ -57,7 +57,9 @@ class TodoList extends React.Component<IProps> {
     }
 
     deleteTodolist = () => {
-        this.props.deleteTodolistTC(this.props.id)
+        if (window.confirm('Are you sure you want to delete this to-do list?')) {
+            this.props.deleteTodolistTC(this.props.id)
+        }
     }
 
     deleteTaskTC = (taskId: string) => {
@@ -73,23 +75,25 @@ class TodoList extends React.Component<IProps> {
                         <TodoListTitle title={this.props.title}
                             deleteTodolist={this.deleteTodolist} changeHeaderTitleTC={this.changeHeaderTitleTC}
                             id={this.props.id} />
-                        <AddNewItemForm addItem={this.addItem} />
+                        <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='New task name' />
                     </div>
-                    <TodoListTasks changeStatus={this.changeStatus}
-                        changeTitle={this.changeTitle}
-                        deleteTask={this.deleteTaskTC}
-                        tasks={tasks.filter(t => {
-                            if (this.state.filterValue === "All") {
-                                return true;
-                            }
-                            if (this.state.filterValue === "Active") {
-                                return t.status === 0;
-                            }
-                            if (this.state.filterValue === "Completed") {
-                                return t.status === 2;
-                            }
-                        })} />
-                    <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
+                    <div className='tasksFooter'>
+                        <TodoListTasks changeStatus={this.changeStatus}
+                            changeTitle={this.changeTitle}
+                            deleteTask={this.deleteTaskTC}
+                            tasks={tasks.filter(t => {
+                                if (this.state.filterValue === "All") {
+                                    return true;
+                                }
+                                if (this.state.filterValue === "Active") {
+                                    return t.status === 0;
+                                }
+                                if (this.state.filterValue === "Completed") {
+                                    return t.status === 2;
+                                }
+                            })} />
+                        <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
+                    </div>
                 </div>
             </div>
         );
