@@ -50,7 +50,7 @@ class TodoListHeader extends React.Component<IProps> {
     }
 
     render = () => {
-        let classForError = this.state.error === true ? 'error' : '';
+        let classForError = this.state.error === true ? `error ${this.props.style}` : `${this.props.style}`;
         return (
             <div className={this.props.style}>
                 <input type="text" placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}

@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 
 interface IProps {
     task: any
@@ -56,14 +56,14 @@ class TodoListTask extends React.Component<IProps> {
         return (
             <div className="todoList-tasks done">
                 <div className={classForTasks}>
-
                     {this.state.editMode
                         ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
-                            value={this.state.title} />
-                        : <div><input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
+                            value={this.state.title} className='css-input' />
+                        : <div><button onClick={this.deleteTask} className='deleteBtn'>X</button>
+                            <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
                             <span onClick={this.activateEditMode} className='border'>{this.props.task.title}</span>
                         </div>}
-                    priority: {priority} <button onClick={this.deleteTask}>X</button>
+                    priority: {priority}
                     <hr />
                 </div>
             </div>

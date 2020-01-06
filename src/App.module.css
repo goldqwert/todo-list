@@ -3,11 +3,18 @@
   box-shadow: 0px 0px 0px rgba(66,66,66,.75);
   text-shadow: 0px 0px 5px rgba(66,66,66,.75);
   outline: none;
+  /* overflow: auto; */
 }
 
 .App {
+overflow: hidden;
+}
+
+.todoWrapper {
 display: flex;
 flex-direction: row;
+justify-content: flex-start;
+flex-wrap: wrap;
 }
 
 .todoList {
@@ -56,12 +63,15 @@ flex-direction: row;
 }
 
 .filter-active {
-background: yellow;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.error {
-	border-color: red;
+.footerBtns {
+  cursor: pointer;
 }
+
+
 
 .todoList-task.done {
  opacity: 0.5;
@@ -79,22 +89,16 @@ background: yellow;
   align-items: center;
 }
 
+.addNewTask.error {
+	border: 3px solid red;
+}
+
 .addNewTask input {
-  width: 700px;
   height: 34px;
-  font: 500 21.5px 'Roboto';
+  font: 500 21.4px 'Roboto';
   box-shadow: 0px 0px 0px rgba(66,66,66,.75);
   text-shadow: 0px 0px 5px rgba(66,66,66,.75);
   border: none;
-}
-
-.css-input {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  font: 500 20px 'Roboto';
-  margin: 20px;
-  text-align: center;
 }
 
 .addNewTask button {
@@ -107,6 +111,36 @@ background: yellow;
   background-color: white;
 }
 
+.addNewTodo {
+  display: flex;
+}
+
+.addNewTodo input{
+  height: 34px;
+  font: 500 21.4px 'Roboto';
+  box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+  text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  border: none;
+}
+
+.addNewTodo button {
+  height: 36px;
+  color: blue;
+  font: 500 20px 'Roboto';
+  box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
+  text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
+  border: none;
+  background-color: white;
+}
+
+.css-input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font: 500 20px 'Roboto';
+  margin: 20px;
+  text-align: center;
+}
 .border {
   word-wrap: break-word;
 }
@@ -119,5 +153,14 @@ background: yellow;
 
 .changeTitleInput {
 
+}
+
+.deleteBtn {
+  color: white;
+  background: #f0353a;
+  border: none;
+  border-radius: 51%;
+  outline: none;
+  cursor: pointer;
 }
 

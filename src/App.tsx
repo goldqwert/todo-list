@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm';
 import { connect } from 'react-redux';
@@ -41,9 +41,9 @@ class App extends React.Component<AppProps> {
         return (
             <>
                 {!this.props.error
-                    ? <div>
-                        <div><AddNewItemForm addItem={this.onAddTodoListClick} style='todo2' placeholder='New To-do list name' /></div>
-                        <div className="App">
+                    ? <div className='appWrapper'>
+                        <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='New To-do list name' /></div>
+                        <div className="todoWrapper">
                             {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                         </div >
                     </div>

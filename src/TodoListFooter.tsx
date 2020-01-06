@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 
 interface IProps {
     changeFilter: (arg: string) => void
@@ -23,9 +23,9 @@ class TodoListFooter extends React.Component<IProps> {
 
     render = () => {
 
-        let classForAll = this.props.filterValue === 'All' ? 'filter-active' : '',
-            classForCompleted = this.props.filterValue === 'Completed' ? 'filter-active' : '',
-            classForActive = this.props.filterValue === 'Active' ? 'filter-active' : '';
+        let classForAll = this.props.filterValue === 'All' ? 'filter-active' : 'footerBtns',
+            classForCompleted = this.props.filterValue === 'Completed' ? 'filter-active' : 'footerBtns',
+            classForActive = this.props.filterValue === 'Active' ? 'filter-active' : 'footerBtns';
 
         return (
             <div className="todoList-footer">
@@ -34,10 +34,9 @@ class TodoListFooter extends React.Component<IProps> {
                     <div onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</div>
                     <div onClick={this.onActiveFilterClick} className={classForActive}>Active</div>
                 </>}
-                {!this.state.isHidden && <div className='todoList_hide' onClick={() => { this.setState({ isHidden: true }) }}>Show</div>}
-                {this.state.isHidden && <div className='todoList_show' onClick={() => { this.setState({ isHidden: false }) }}>Hide</div>}
-            </div>
-        );
+                {!this.state.isHidden && <div className='footerBtns' onClick={() => { this.setState({ isHidden: true }) }}>Show</div>}
+                {this.state.isHidden && <div className='footerBtns' onClick={() => { this.setState({ isHidden: false }) }}>Hide</div>}
+            </div>);
     }
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 import TodoListTitle from './TodoListTitle';
 import AddNewItemForm from './AddNewItemForm'
 import TodoListTasks from './TodoListTasks';
