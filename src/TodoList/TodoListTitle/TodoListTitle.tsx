@@ -33,15 +33,14 @@ class TodoListTitle extends React.Component<IProps> {
         })
     }
     render = () => {
-        return (
-            <div>
-                <button onClick={this.props.deleteTodolist} className={s.deleteBtn}>X</button>
-                <div className={s.border2}>{this.state.editMode
-                    ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
-                        className={s.cssinput} />
-                    : <h3 onClick={this.activateEditMode} className={`${s.todoListheader__title} ${s.size}`}>{this.props.title}</h3>
-                }</div>
-            </div>);
+        return (<div>
+            <button onClick={this.props.deleteTodolist} className={s.deleteBtn}>X</button>
+            <div>{this.state.editMode
+                ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
+                    className={s.element} />
+                : <h3 onClick={this.activateEditMode} className={s.titleSize}>{this.props.title}</h3>
+            }</div>
+        </div>);
     }
 }
 

@@ -22,13 +22,11 @@ class TodoListFooter extends React.Component<IProps> {
     }
 
     render = () => {
-
-        let classForAll = this.props.filterValue === 'All' ? `${s.filteractive}` : `${s.footerBtns}`,
-            classForCompleted = this.props.filterValue === 'Completed' ? `${s.filteractive}` : `${s.footerBtns}`,
-            classForActive = this.props.filterValue === 'Active' ? `${s.filteractive}` : `${s.footerBtns}`;
-
+        const classForAll = this.props.filterValue === 'All' ? `${s.filterActive}` : `${s.footerBtns}`;
+        const classForCompleted = this.props.filterValue === 'Completed' ? `${s.filterActive}` : `${s.footerBtns}`;
+        const classForActive = this.props.filterValue === 'Active' ? `${s.filterActive}` : `${s.footerBtns}`;
         return (
-            <div className={s.todoListfooter}>
+            <div className={s.footerWrapper}>
                 {this.state.isHidden && <>
                     <div onClick={this.onAllFilterClick} className={classForAll}>All</div>
                     <div onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</div>

@@ -5,9 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./image/bg/background.jpg') center center/cover no-repeat;
-  min-width: 100vw;
-  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+  text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  outline: none;
 }
 
 code {

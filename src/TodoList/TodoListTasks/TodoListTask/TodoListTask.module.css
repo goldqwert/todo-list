@@ -1,35 +1,31 @@
-deleteBtn
-border
+.task {
+    width: 295px;
+    padding-top: 5px;
+    cursor: auto;
+    word-wrap: break-word;
+}
 
-.todoListtasks.done {
+.task.done {
     opacity: 0.5;
-   }
+}
    
-.cssinput {
+.element {
     background-color: transparent;
     outline: none;
     border: none;
     font: 500 20px 'Roboto';
     margin: 20px;
     text-align: center;
-  }
-  
-.border {
-    word-wrap: break-word;
-  }
-  
-.border2 {
-    display: flex;
-      justify-content: center;
-      align-items: center;
-  }
+    resize: none;
+    cursor: pointer;
+}
   
 .deleteBtn {
-    color: white;
-    background: #f0353a;
+    color: #fffafa;
+    background: #c72800;
     border: none;
-    border-radius: 51%;
+    border-radius: 100%;
     outline: none;
     cursor: pointer;
-  }
+}
   

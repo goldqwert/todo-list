@@ -33,7 +33,7 @@ class TodoListTask extends React.Component<IProps> {
         })
     }
 
-    onTitleChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onTitleChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({
             title: e.currentTarget.value
         })
@@ -44,7 +44,7 @@ class TodoListTask extends React.Component<IProps> {
     }
 
     render = () => {
-        let classForTasks = this.props.task.status ? `${s.todoListtasks} ${s.done}` : `${s.todoListtasks}`;
+        let classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -57,9 +57,9 @@ class TodoListTask extends React.Component<IProps> {
             <div className={`${s.todoListtasks} ${s.done}`}>
                 <div className={classForTasks}>
                     {this.state.editMode
-                        ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
-                            value={this.state.title} className={s.cssinput} />
-                        : <div><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
+                        ? <textarea onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
+                            value={this.state.title} className={s.element} />
+                        : <div className={s.borderForWord}><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
                             <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
                             <span onClick={this.activateEditMode} className={s.border}>{this.props.task.title}</span>
                         </div>}

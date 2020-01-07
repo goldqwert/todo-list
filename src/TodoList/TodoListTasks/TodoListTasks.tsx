@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './TodoListTasks.module.css';
+// import s from './TodoListTasks.module.css';
 import TodoListTask from './TodoListTask/TodoListTask';
 
 interface IProps {
@@ -16,7 +16,7 @@ class TodoListTasks extends React.Component<IProps> {
         })
 
         return (
-            <div className={s.todoListtasks}>
+            <div>
                 {tasksElement}
             </div>
         );

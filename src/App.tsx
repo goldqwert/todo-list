@@ -10,7 +10,6 @@ interface IProps {
     addTodolistTC: (title: string) => void
     showTodolistsAC: () => void
 }
-
 interface mapStateToProps {
     todolists: any[],
     error: boolean
@@ -38,21 +37,19 @@ class App extends React.Component<AppProps> {
     }
 
     render = () => {
-        return (
-            <>
-                {!this.props.error
-                    ? <div className={s.appWrapper}>
-                        <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='New To-do list name' /></div>
-                        <div className={s.todoWrapper}>
-                            {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
-                        </div>
+        return (<div className={s.appWrapper}>
+            {!this.props.error
+                ? <div>
+                    <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='New To-do list name' /></div>
+                    <div className={s.todoWrapper}>
+                        {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                     </div>
-                    : <div>
-                        Maximum count of Todo lists count is 10
+                </div>
+                : <div>
+                    Maximum count of Todo lists count is 10
                         <button onClick={this.showTodolists}>Come back</button>
-                    </div>}
-            </>
-        );
+                </div>}
+        </div>);
     }
 }
 

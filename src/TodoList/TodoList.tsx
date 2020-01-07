@@ -69,7 +69,7 @@ class TodoList extends React.Component<IProps> {
     render = () => {
         let { tasks = [] } = this.props
         return (
-            <div className={s.App}>
+            <div className={s.todoWrapper}>
                 <div className={s.todolist}>
                     <div className={s.todoListheader}>
                         <TodoListTitle title={this.props.title}

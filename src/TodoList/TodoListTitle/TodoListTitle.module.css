@@ -1,0 +1,27 @@
+.titleSize {
+    width: 300px;
+    white-space: nowrap; /* Отменяем перенос текста */
+    overflow: hidden; /* Обрезаем содержимое */
+    text-overflow: ellipsis; /* Многоточие */
+}
+   
+.element {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font: 800 20px 'Roboto';
+    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    margin: 20px;
+    text-align: center;
+  }
+  
+.deleteBtn {
+    color: #fffafa;
+    background: #c72800;
+    border: none;
+    border-radius: 100%;
+    outline: none;
+    cursor: pointer;
+  }
+  
