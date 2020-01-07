@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './App.module.css';
+import s from './TodoListTitle.module.css';
 
 interface IProps {
     title: string
@@ -35,11 +35,11 @@ class TodoListTitle extends React.Component<IProps> {
     render = () => {
         return (
             <div>
-                <button onClick={this.props.deleteTodolist} className='deleteBtn'>X</button>
-                <div className='border2'>{this.state.editMode
+                <button onClick={this.props.deleteTodolist} className={s.deleteBtn}>X</button>
+                <div className={s.border2}>{this.state.editMode
                     ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
-                        className='css-input' />
-                    : <h3 onClick={this.activateEditMode} className="todoList-header__title size">{this.props.title}</h3>
+                        className={s.cssinput} />
+                    : <h3 onClick={this.activateEditMode} className={`${s.todoListheader__title} ${s.size}`}>{this.props.title}</h3>
                 }</div>
             </div>);
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './AddNewItemForm.module.css';
 
 interface IProps {
     addItem: (newText: string) => void
@@ -7,7 +7,7 @@ interface IProps {
     placeholder: string
 }
 
-class TodoListHeader extends React.Component<IProps> {
+class AddNewItemForm extends React.Component<IProps> {
 
     state = {
         error: false,
@@ -50,10 +50,12 @@ class TodoListHeader extends React.Component<IProps> {
     }
 
     render = () => {
-        let classForError = this.state.error === true ? `error ${this.props.style}` : `${this.props.style}`;
+        const classForInput = (this.props.style === 'addNewTask') ? `${s.addNewTask}` :
+            (this.props.style === 'addNewTodo') ? `${s.addNewTodo}` : ''
+        const classForError = this.state.error === true ? `${s.error} ${classForInput}` : `${classForInput}`;
         return (
-            <div className={this.props.style}>
-                <input type="text" placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
+            <div className={classForInput}>
+                <input type='text' placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
                     className={classForError}
                     value={this.state.title}
                     onChange={this.changeValueTitle} />
@@ -63,4 +65,4 @@ class TodoListHeader extends React.Component<IProps> {
     }
 }
 
-export default TodoListHeader;
+export default AddNewItemForm;

@@ -1,0 +1,35 @@
+deleteBtn
+border
+
+.todoListtasks.done {
+    opacity: 0.5;
+   }
+   
+.cssinput {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font: 500 20px 'Roboto';
+    margin: 20px;
+    text-align: center;
+  }
+  
+.border {
+    word-wrap: break-word;
+  }
+  
+.border2 {
+    display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+.deleteBtn {
+    color: white;
+    background: #f0353a;
+    border: none;
+    border-radius: 51%;
+    outline: none;
+    cursor: pointer;
+  }
+  

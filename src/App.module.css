@@ -30,58 +30,8 @@ flex-wrap: wrap;
   background-color: white;
 }
 
-.todoList-tasks {
-  color: black;
-  
-}
-
-.todoList-newTaskForm {
-    
-}
 
 
-/* .todoList-footer {
-  background-color: white;
-} */
-.todoList-task {
-
-}
-.todoList-header {
-
-}
-
-.todoList-header__title {
-  color: black;
-  text-align: center;
-  font: 500 20px 'Roboto';
-}
-
-.todoList-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.filter-active {
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.footerBtns {
-  cursor: pointer;
-}
-
-
-
-.todoList-task.done {
- opacity: 0.5;
-}
-
-.size {
-  white-space: nowrap; /* Отменяем перенос текста */
-  overflow: hidden; /* Обрезаем содержимое */
-  text-overflow: ellipsis; /* Многоточие */
- }
 
 .addNewTask {
   display: flex;
@@ -133,34 +83,4 @@ flex-wrap: wrap;
   background-color: white;
 }
 
-.css-input {
-  background-color: transparent;
-  outline: none;
-  border: none;
-  font: 500 20px 'Roboto';
-  margin: 20px;
-  text-align: center;
-}
-.border {
-  word-wrap: break-word;
-}
-
-.border2 {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.changeTitleInput {
-
-}
-
-.deleteBtn {
-  color: white;
-  background: #f0353a;
-  border: none;
-  border-radius: 51%;
-  outline: none;
-  cursor: pointer;
-}
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './App.module.css';
+import s from './TodoListTask.module.css';
 
 interface IProps {
     task: any
@@ -44,7 +44,7 @@ class TodoListTask extends React.Component<IProps> {
     }
 
     render = () => {
-        let classForTasks = this.props.task.status ? 'todoList-task done' : 'todoList-task';
+        let classForTasks = this.props.task.status ? `${s.todoListtasks} ${s.done}` : `${s.todoListtasks}`;
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -54,14 +54,14 @@ class TodoListTask extends React.Component<IProps> {
             case 4: priority = 'Later'; break;
         }
         return (
-            <div className="todoList-tasks done">
+            <div className={`${s.todoListtasks} ${s.done}`}>
                 <div className={classForTasks}>
                     {this.state.editMode
                         ? <input onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
-                            value={this.state.title} className='css-input' />
-                        : <div><button onClick={this.deleteTask} className='deleteBtn'>X</button>
+                            value={this.state.title} className={s.cssinput} />
+                        : <div><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
                             <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
-                            <span onClick={this.activateEditMode} className='border'>{this.props.task.title}</span>
+                            <span onClick={this.activateEditMode} className={s.border}>{this.props.task.title}</span>
                         </div>}
                     priority: {priority}
                     <hr />

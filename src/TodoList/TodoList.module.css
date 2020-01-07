@@ -1,0 +1,72 @@
+.App {
+    overflow: hidden;
+}
+
+.todoListheader {
+
+}
+
+.todoListheader {
+  color: black;
+  text-align: center;
+  font: 500 20px 'Roboto';
+}
+
+.tasksFooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+.addNewTodo {
+    display: flex;
+  }
+  
+.addNewTodo input{
+    height: 34px;
+    font: 500 21.4px 'Roboto';
+    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    border: none;
+  }
+  
+.addNewTodo button {
+    height: 36px;
+    color: blue;
+    font: 500 20px 'Roboto';
+    box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
+    text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
+    border: none;
+    background-color: white;
+  }
+  
+  .addNewTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .addNewTask.error {
+      border: 3px solid red;
+  }
+  
+  .addNewTask input {
+    height: 34px;
+    font: 500 21.4px 'Roboto';
+    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+    border: none;
+  }
+  
+  .addNewTask button {
+    height: 36px;
+    color: blue;
+    font: 500 20px 'Roboto';
+    box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
+    text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
+    border: none;
+    background-color: white;
+  }
+  
+  
+  

@@ -1,11 +1,11 @@
 import React from 'react';
-import s from './App.module.css';
-import TodoListTitle from './TodoListTitle';
-import AddNewItemForm from './AddNewItemForm'
-import TodoListTasks from './TodoListTasks';
-import TodoListFooter from './TodoListFooter';
+import s from './TodoList.module.css';
+import TodoListTitle from './TodoListTitle/TodoListTitle';
+import AddNewItemForm from '../AddNewItemForm/AddNewItemForm';
+import TodoListTasks from './TodoListTasks/TodoListTasks';
+import TodoListFooter from './TodoListFooter/TodoListFooter';
 import { connect } from 'react-redux';
-import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from './redux/reducer';
+import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from '../redux/reducer';
 
 interface IProps {
     id: string
@@ -69,15 +69,15 @@ class TodoList extends React.Component<IProps> {
     render = () => {
         let { tasks = [] } = this.props
         return (
-            <div className="App">
-                <div className="todoList">
-                    <div className='todoList-header'>
+            <div className={s.App}>
+                <div className={s.todolist}>
+                    <div className={s.todoListheader}>
                         <TodoListTitle title={this.props.title}
                             deleteTodolist={this.deleteTodolist} changeHeaderTitleTC={this.changeHeaderTitleTC}
                             id={this.props.id} />
                         <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='New task name' />
                     </div>
-                    <div className='tasksFooter'>
+                    <div className={s.tasksFooter}>
                         <TodoListTasks changeStatus={this.changeStatus}
                             changeTitle={this.changeTitle}
                             deleteTask={this.deleteTaskTC}

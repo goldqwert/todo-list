@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './App.module.css';
-import TodoList from './TodoList';
-import AddNewItemForm from './AddNewItemForm';
+import TodoList from './TodoList/TodoList';
+import AddNewItemForm from './AddNewItemForm/AddNewItemForm'
 import { connect } from 'react-redux';
 import { getTodolistsTC, addTodolistTC, showTodolistsAC } from './redux/reducer';
 
@@ -41,11 +41,11 @@ class App extends React.Component<AppProps> {
         return (
             <>
                 {!this.props.error
-                    ? <div className='appWrapper'>
+                    ? <div className={s.appWrapper}>
                         <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='New To-do list name' /></div>
-                        <div className="todoWrapper">
+                        <div className={s.todoWrapper}>
                             {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
-                        </div >
+                        </div>
                     </div>
                     : <div>
                         Maximum count of Todo lists count is 10
