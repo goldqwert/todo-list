@@ -24,6 +24,7 @@ interface State {
 interface IChangeTask {
     status?: number
     title?: string
+    priority?: number
 }
 
 interface IChangeTitle {

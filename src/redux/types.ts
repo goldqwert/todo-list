@@ -48,7 +48,6 @@ export interface deleteTask {
     todolistId: string
     taskId: string
 }
-
 export interface showError {
     type: typeof SHOW_ERROR
 }

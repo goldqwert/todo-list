@@ -1,18 +1,34 @@
 import React from 'react';
 import s from './TodoListTask.module.css';
+import Select from 'react-select';
 
+const options = [
+    { value: 0, label: 'Low' },
+    { value: 1, label: 'Middle' },
+    { value: 2, label: 'Hight' },
+    { value: 3, label: 'Urgently' },
+    { value: 4, label: 'Later' }
+];
 interface IProps {
     task: any
     changeStatus: (id: string, status: number) => void
     changeTitle: (id: string, title: string) => void
+    changePriority: (id: string, priority: number) => void
     deleteTask: (id: string) => void
+}
+
+interface ISelectedOption {
+    value: number
+    label: string
 }
 class TodoListTask extends React.Component<IProps> {
 
     state = {
         editMode: false,
+        editModeForForm: false,
         title: this.props.task.title,
-        error: false
+        error: false,
+        selectedOption: null
     }
 
     onChangeStatus = (e: React.FormEvent<HTMLInputElement>) => {
@@ -26,10 +42,22 @@ class TodoListTask extends React.Component<IProps> {
         })
     }
 
+    activateFormEditMode = () => {
+        this.setState({
+            editModeForForm: true
+        })
+    }
+
     deactivateEditMode = () => {
         this.props.changeTitle(this.props.task.id, this.state.title)
         this.setState({
             editMode: false
+        })
+    }
+
+    deactivateFormEditMode = () => {
+        this.setState({
+            editModeForForm: false
         })
     }
 
@@ -41,6 +69,13 @@ class TodoListTask extends React.Component<IProps> {
 
     deleteTask = () => {
         this.props.deleteTask(this.props.task.id)
+    }
+
+    handleChange = (selectedOption: any) => {
+        this.setState(
+            { selectedOption },
+            () => this.props.changePriority(this.props.task.id, selectedOption.value)
+        );
     }
 
     render = () => {
@@ -60,13 +95,20 @@ class TodoListTask extends React.Component<IProps> {
                         ? <textarea onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
                             value={this.state.title} className={s.element} />
                         : <div className={s.borderForWord}><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
-                            <input onChange={this.onChangeStatus} type="checkbox" checked={this.props.task.status} />
+                            <input onChange={this.onChangeStatus} type='checkbox' checked={this.props.task.status} />
                             <span onClick={this.activateEditMode} className={s.border}>{this.props.task.title}</span>
                         </div>}
-                    priority: {priority}
+                    {this.state.editModeForForm
+                        ? <Select
+                            options={options}
+                            onChange={this.handleChange}
+                            value={this.state.selectedOption}
+                            onBlur={this.deactivateFormEditMode}
+                        />
+                        : <div onClick={this.activateFormEditMode}>priority: {priority}</div>}
                     <hr />
                 </div>
-            </div>
+            </div >
         );
     }
 }

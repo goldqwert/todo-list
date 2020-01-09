@@ -5,6 +5,7 @@ import TodoListTask from './TodoListTask/TodoListTask';
 interface IProps {
     changeStatus: (id: string, status: number) => void
     changeTitle: (id: string, title: string) => void
+    changePriority: (id: string, priority: number) => void
     deleteTask: (id: string) => void
     tasks: any;
 }
@@ -12,7 +13,7 @@ class TodoListTasks extends React.Component<IProps> {
     render = () => {
         let tasksElement = this.props.tasks.map((t: Task) => {
             return <TodoListTask task={t} changeStatus={this.props.changeStatus} changeTitle={this.props.changeTitle}
-                deleteTask={this.props.deleteTask} />
+                deleteTask={this.props.deleteTask} changePriority={this.props.changePriority} />
         })
 
         return (

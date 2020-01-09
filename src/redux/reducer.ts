@@ -132,6 +132,7 @@ const changeTaskAC = (taskId: string, obj: IChangeTask, todolistId: string): cha
 const changeHeaderAC = (todolistId: string, title: any): changeHeader => ({ type: CHANGE_HEADER, todolistId, title })
 const deleteTodolistAC = (todolistId: string): deleteTodolist => ({ type: DETELE_TODOLIST, todolistId })
 const deleteTaskAC = (taskId: string, todolistId: string): deleteTask => ({ type: DELETE_TASK, taskId, todolistId })
+// const changePriorityAC = (priority: number): changePriority => ({})
 const showErrorAC = (): showError => ({ type: SHOW_ERROR })
 export const showTodolistsAC = (): showTodolists => ({ type: SHOW_TODOLISTS })
 
@@ -204,5 +205,6 @@ export const deleteTaskTC = (taskId: string, todolistId: string) => {
         dispatch(deleteTaskAC(taskId, todolistId))
     }
 }
+
 
 

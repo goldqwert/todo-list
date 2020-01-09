@@ -31,5 +31,8 @@ export const api = {
     },
     changeHeader(todolistId: string, title: string) {
         return instance.put(`/${todolistId}`, { title })
+    },
+    changePriority(priority: number) {
+        return instance.put('/tasks/', priority)
     }
 }

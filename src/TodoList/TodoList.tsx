@@ -18,8 +18,6 @@ interface IProps {
     deleteTodolistTC: (id: string) => void
     deleteTaskTC: (taskId: string, id: string) => void
 }
-
-
 class TodoList extends React.Component<IProps> {
 
     componentDidMount() {
@@ -52,6 +50,10 @@ class TodoList extends React.Component<IProps> {
         this.changeTaskTC(taskId, { title });
     }
 
+    changePriority = (taskId: string, priority: number) => {
+        this.changeTaskTC(taskId, { priority })
+    }
+
     changeHeaderTitleTC = (title: string) => {
         this.props.changeHeaderTC(this.props.id, title)
     }
@@ -80,6 +82,7 @@ class TodoList extends React.Component<IProps> {
                     <div className={s.tasksFooter}>
                         <TodoListTasks changeStatus={this.changeStatus}
                             changeTitle={this.changeTitle}
+                            changePriority={this.changePriority}
                             deleteTask={this.deleteTaskTC}
                             tasks={tasks.filter(t => {
                                 if (this.state.filterValue === "All") {
@@ -100,5 +103,7 @@ class TodoList extends React.Component<IProps> {
     }
 }
 
-const connectedTodolist = connect(null, { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC })(TodoList);
+const connectedTodolist = connect(null, {
+    getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC,
+})(TodoList);
 export default connectedTodolist;
