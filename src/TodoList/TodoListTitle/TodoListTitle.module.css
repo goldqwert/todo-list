@@ -1,8 +1,6 @@
 .titleSize {
     width: 300px;
-    white-space: nowrap; /* Отменяем перенос текста */
-    overflow: hidden; /* Обрезаем содержимое */
-    text-overflow: ellipsis; /* Многоточие */
+    word-break: break-all;
 }
    
 .element {

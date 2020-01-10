@@ -16,7 +16,6 @@ interface Todolist {
     id: string
     title: string
 }
-
 interface State {
     todolists: Todolist[]
     error: boolean
@@ -25,6 +24,9 @@ interface IChangeTask {
     status?: number
     title?: string
     priority?: number
+    description?: string
+    startDate?: string
+    deadline?: string
 }
 
 interface IChangeTitle {

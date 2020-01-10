@@ -54,6 +54,18 @@ class TodoList extends React.Component<IProps> {
         this.changeTaskTC(taskId, { priority })
     }
 
+    changeDescription = (taskId: string, description: string) => {
+        this.changeTaskTC(taskId, { description })
+    }
+
+    changeStartDate = (taskId: string, startDate: string) => {
+        this.changeTaskTC(taskId, { startDate })
+    }
+
+    changeDeadline = (taskId: string, deadline: string) => {
+        this.changeTaskTC(taskId, { deadline })
+    }
+
     changeHeaderTitleTC = (title: string) => {
         this.props.changeHeaderTC(this.props.id, title)
     }
@@ -83,6 +95,9 @@ class TodoList extends React.Component<IProps> {
                         <TodoListTasks changeStatus={this.changeStatus}
                             changeTitle={this.changeTitle}
                             changePriority={this.changePriority}
+                            changeDescription={this.changeDescription}
+                            changeStartDate={this.changeStartDate}
+                            changeDeadline={this.changeDeadline}
                             deleteTask={this.deleteTaskTC}
                             tasks={tasks.filter(t => {
                                 if (this.state.filterValue === "All") {

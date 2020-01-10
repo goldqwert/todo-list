@@ -1,8 +1,8 @@
 .task {
-    width: 295px;
+    word-break: break-all;
+    max-width: 295px;
     padding-top: 5px;
     cursor: auto;
-    word-wrap: break-word;
 }
 
 .task.done {

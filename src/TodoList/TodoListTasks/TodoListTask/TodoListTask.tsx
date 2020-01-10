@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { DataHTMLAttributes } from 'react';
 import s from './TodoListTask.module.css';
 import Select from 'react-select';
+import dateFormat from 'dateformat';
 
 const options = [
     { value: 0, label: 'Low' },
@@ -14,6 +15,9 @@ interface IProps {
     changeStatus: (id: string, status: number) => void
     changeTitle: (id: string, title: string) => void
     changePriority: (id: string, priority: number) => void
+    changeDescription: (id: string, description: string) => void
+    changeStartDate: (id: string, startData: string) => void
+    changeDeadline: (id: string, deadline: string) => void
     deleteTask: (id: string) => void
 }
 
@@ -25,8 +29,10 @@ class TodoListTask extends React.Component<IProps> {
 
     state = {
         editMode: false,
-        editModeForForm: false,
         title: this.props.task.title,
+        description: this.props.task.description,
+        startDate: this.props.task.startDate,
+        deadline: this.props.task.deadline,
         error: false,
         selectedOption: null
     }
@@ -42,28 +48,37 @@ class TodoListTask extends React.Component<IProps> {
         })
     }
 
-    activateFormEditMode = () => {
-        this.setState({
-            editModeForForm: true
-        })
-    }
-
     deactivateEditMode = () => {
         this.props.changeTitle(this.props.task.id, this.state.title)
+        this.props.changeDescription(this.props.task.id, this.state.description)
+        this.props.changeStartDate(this.props.task.id, this.state.startDate)
+        this.props.changeDeadline(this.props.task.id, this.state.deadline)
         this.setState({
             editMode: false
         })
     }
 
-    deactivateFormEditMode = () => {
+    onTitleChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.setState({
-            editModeForForm: false
+            title: e.currentTarget.value
         })
     }
 
-    onTitleChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onDescriptionChanged = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         this.setState({
-            title: e.currentTarget.value
+            description: e.currentTarget.value
+        })
+    }
+
+    onStartDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            startDate: e.currentTarget.value
+        })
+    }
+
+    onDeadlineChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            deadline: e.currentTarget.value
         })
     }
 
@@ -79,7 +94,9 @@ class TodoListTask extends React.Component<IProps> {
     }
 
     render = () => {
-        let classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
+        const classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
+        // let startDate = dateFormat(this.props.task.startDate, 'fullDate');
+        // let deadline = dateFormat(this.props.task.deadline, 'fullDate');
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -89,23 +106,30 @@ class TodoListTask extends React.Component<IProps> {
             case 4: priority = 'Later'; break;
         }
         return (
-            <div className={`${s.todoListtasks} ${s.done}`}>
+            <div className={s.tasks}>
                 <div className={classForTasks}>
                     {this.state.editMode
-                        ? <textarea onChange={this.onTitleChanged} onBlur={this.deactivateEditMode} autoFocus={true}
-                            value={this.state.title} className={s.element} />
+                        ? <>Task name:<input onChange={this.onTitleChanged} autoFocus={true}
+                            value={this.state.title} />
+                            <div>Description: <textarea onChange={this.onDescriptionChanged} value={this.state.description} /></div>
+                            <div>Priority:<Select
+                                options={options}
+                                onChange={this.handleChange}
+                                value={this.state.selectedOption}
+                                onBlur={this.deactivateEditMode}
+                            /></div>
+                            <label>Created by: <input type='date' onChange={this.onStartDateChanged} /></label>
+                            <div>Deadline: <input type='date' onChange={this.onDeadlineChanged} /></div>
+                            <button onClick={this.deactivateEditMode}>Save</button></>
                         : <div className={s.borderForWord}><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
                             <input onChange={this.onChangeStatus} type='checkbox' checked={this.props.task.status} />
-                            <span onClick={this.activateEditMode} className={s.border}>{this.props.task.title}</span>
+                            <span className={s.border}>{this.props.task.title}</span>
+                            <button onClick={this.activateEditMode}>Edit</button>
+                            <div>{this.props.task.description}</div>
+                            <div>{this.props.task.startDate}</div>
+                            <div>{this.props.task.deadline}</div>
+                            <div>priority: {priority}</div>
                         </div>}
-                    {this.state.editModeForForm
-                        ? <Select
-                            options={options}
-                            onChange={this.handleChange}
-                            value={this.state.selectedOption}
-                            onBlur={this.deactivateFormEditMode}
-                        />
-                        : <div onClick={this.activateFormEditMode}>priority: {priority}</div>}
                     <hr />
                 </div>
             </div >
