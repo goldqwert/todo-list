@@ -1,17 +1,19 @@
 .appWrapper {
-overflow: hidden;
-background: url('./image/bg/background.jpg') center center/cover no-repeat;
+background-color: #856aff;
 min-width: 100vw;
-min-height: 100vh;
+min-height: 100vh; 
 }
 
 .todoWrapper {
 display: flex;
 flex-direction: row;
-justify-content: flex-start;
+justify-content: center;
 flex-wrap: wrap;
-max-width: 700px;
 margin: 0 auto;
+}
+
+.todo {
+    background-color: #F5F5DC;
 }
 
 

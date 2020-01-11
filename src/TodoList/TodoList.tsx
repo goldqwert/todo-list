@@ -87,9 +87,9 @@ class TodoList extends React.Component<IProps> {
                 <div className={s.todolist}>
                     <div className={s.todoListheader}>
                         <TodoListTitle title={this.props.title}
-                            deleteTodolist={this.deleteTodolist} changeHeaderTitleTC={this.changeHeaderTitleTC}
+                            changeHeaderTitleTC={this.changeHeaderTitleTC}
                             id={this.props.id} />
-                        <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='New task name' />
+                        <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='new task' />
                     </div>
                     <div className={s.tasksFooter}>
                         <TodoListTasks changeStatus={this.changeStatus}
@@ -110,7 +110,8 @@ class TodoList extends React.Component<IProps> {
                                     return t.status === 2;
                                 }
                             })} />
-                        <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
+                        <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}
+                            deleteTodolist={this.deleteTodolist} />
                     </div>
                 </div>
             </div>

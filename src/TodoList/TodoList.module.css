@@ -1,5 +1,12 @@
 .todoWrapper {
 padding: 20px;
 }
+
+.tasksFooter {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #fffafa;
+    border-radius: 0 0 6px 6px;
+}
   
   

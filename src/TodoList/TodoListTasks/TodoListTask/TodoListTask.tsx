@@ -31,8 +31,8 @@ class TodoListTask extends React.Component<IProps> {
         editMode: false,
         title: this.props.task.title,
         description: this.props.task.description,
-        startDate: this.props.task.startDate,
-        deadline: this.props.task.deadline,
+        // startDate: this.props.task.startDate,
+        // deadline: this.props.task.deadline,
         error: false,
         selectedOption: null
     }
@@ -51,8 +51,8 @@ class TodoListTask extends React.Component<IProps> {
     deactivateEditMode = () => {
         this.props.changeTitle(this.props.task.id, this.state.title)
         this.props.changeDescription(this.props.task.id, this.state.description)
-        this.props.changeStartDate(this.props.task.id, this.state.startDate)
-        this.props.changeDeadline(this.props.task.id, this.state.deadline)
+        // this.props.changeStartDate(this.props.task.id, this.state.startDate)
+        // this.props.changeDeadline(this.props.task.id, this.state.deadline)
         this.setState({
             editMode: false
         })
@@ -70,16 +70,28 @@ class TodoListTask extends React.Component<IProps> {
         })
     }
 
-    onStartDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            startDate: e.currentTarget.value
-        })
+    // onStartDateChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     this.setState({
+    //         startDate: e.currentTarget.value
+    //     }, () => {
+    //         console.log(e.currentTarget.value)
+    //     })
+    // }
+
+    // onDeadlineChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     this.setState({
+    //         deadline: e.currentTarget.value
+    //     }, () => {
+    //         console.log(e.currentTarget)
+    //     })
+    // }
+
+    changeStartDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.changeStartDate(this.props.task.id, e.currentTarget.value)
     }
 
-    onDeadlineChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            deadline: e.currentTarget.value
-        })
+    changeDeadline = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.changeDeadline(this.props.task.id, e.currentTarget.value)
     }
 
     deleteTask = () => {
@@ -95,8 +107,9 @@ class TodoListTask extends React.Component<IProps> {
 
     render = () => {
         const classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
-        // let startDate = dateFormat(this.props.task.startDate, 'fullDate');
-        // let deadline = dateFormat(this.props.task.deadline, 'fullDate');
+        let startDate = dateFormat(this.props.task.startDate, 'fullDate');
+        let deadline = dateFormat(this.props.task.deadline, 'fullDate');
+        let addedDate = dateFormat(this.props.task.addedDate, 'fullDate');
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -118,16 +131,17 @@ class TodoListTask extends React.Component<IProps> {
                                 value={this.state.selectedOption}
                                 onBlur={this.deactivateEditMode}
                             /></div>
-                            <label>Created by: <input type='date' onChange={this.onStartDateChanged} /></label>
-                            <div>Deadline: <input type='date' onChange={this.onDeadlineChanged} /></div>
+                            <label>Created by: <input type='date' onChange={this.changeStartDate} /></label>
+                            <div>Deadline: <input type='date' onChange={this.changeDeadline} /></div>
                             <button onClick={this.deactivateEditMode}>Save</button></>
                         : <div className={s.borderForWord}><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
                             <input onChange={this.onChangeStatus} type='checkbox' checked={this.props.task.status} />
                             <span className={s.border}>{this.props.task.title}</span>
                             <button onClick={this.activateEditMode}>Edit</button>
                             <div>{this.props.task.description}</div>
-                            <div>{this.props.task.startDate}</div>
-                            <div>{this.props.task.deadline}</div>
+                            <div>{startDate}</div>
+                            <div>{deadline}</div>
+                            <div>{addedDate}</div>
                             <div>priority: {priority}</div>
                         </div>}
                     <hr />

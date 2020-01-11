@@ -4,7 +4,6 @@ import s from './TodoListTitle.module.css';
 interface IProps {
     title: string
     id: string
-    deleteTodolist: () => void
     changeHeaderTitleTC: (title: string) => void
 }
 class TodoListTitle extends React.Component<IProps> {
@@ -34,7 +33,7 @@ class TodoListTitle extends React.Component<IProps> {
     }
     render = () => {
         return (<div>
-            <button onClick={this.props.deleteTodolist} className={s.deleteBtn}>X</button>
+
             <div>{this.state.editMode
                 ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
                     className={s.element} />

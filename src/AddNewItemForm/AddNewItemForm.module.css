@@ -1,11 +1,15 @@
+
 .addNewTodo {
   display: flex;
+  
 }
 
 .addNewTask {
+  min-width: 250px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px 0 0 0;
 }
   
 .addNewTask.error, .addNewTodo.error  {
@@ -14,20 +18,24 @@
   
 .addNewTask input {
     height: 26px;
-    font: 500 21.4px 'Roboto';
+    font: 500 16px 'Roboto';
     box-shadow: 0px 0px 0px rgba(66,66,66,.75);
     text-shadow: 0px 0px 5px rgba(66,66,66,.75);
     border: none;
+    padding: 7px;
+    outline: none;
 }
   
 .addNewTask button {
-    height: 28px;
+    height: 40px;
     color: blue;
     font: 500 20px 'Roboto';
     box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
     text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
     border: none;
     background-color: white;
+    border-radius: 0 6px 0 0;
+    outline: none;
 }
   
 .addNewTodo input{
@@ -36,6 +44,7 @@
     box-shadow: 0px 0px 0px rgba(66,66,66,.75);
     text-shadow: 0px 0px 5px rgba(66,66,66,.75);
     border: none;
+    outline: none;
 }
   
 .addNewTodo button {
@@ -46,6 +55,7 @@
     text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
     border: none;
     background-color: white;
+    outline: none;
 }
   
   

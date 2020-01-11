@@ -40,12 +40,12 @@ class App extends React.Component<AppProps> {
         return (<div className={s.appWrapper}>
             {!this.props.error
                 ? <div>
-                    <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='New To-do list name' /></div>
+                    <div><AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='new to-do list' /></div>
                     <div className={s.todoWrapper}>
                         {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                     </div>
                 </div>
-                : <div>
+                : <div className={s.todo}>
                     Maximum count of Todo lists count is 10
                         <button onClick={this.showTodolists}>Come back</button>
                 </div>}

@@ -1,6 +1,11 @@
 .titleSize {
-    width: 300px;
-    word-break: break-all;
+  width: 300px;
+  word-break: break-all;
+  height: 40px;
+  color: #F5F5DC;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
    
 .element {
@@ -15,8 +20,8 @@
   }
   
 .deleteBtn {
-    color: #fffafa;
-    background: #c72800;
+    color: #F5F5DC;
+    background: #FF0000;
     border: none;
     border-radius: 100%;
     outline: none;
