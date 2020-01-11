@@ -1,5 +1,5 @@
 .filterActive {
-    font-weight: 600;
+    border-bottom: 3px solid #856aff;
     cursor: pointer;
 }
 
@@ -10,4 +10,8 @@
 
 .footerBtns {
     cursor: pointer;
+}
+
+.footerBtns:hover {
+border-bottom: 3px solid #856aff;
 }

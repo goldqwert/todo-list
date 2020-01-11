@@ -27,7 +27,7 @@ class TodoListFooter extends React.Component<IProps> {
                 <div onClick={this.onAllFilterClick} className={classForAll}>All</div>
                 <div onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</div>
                 <div onClick={this.onActiveFilterClick} className={classForActive}>Active</div>
-                <div onClick={this.props.deleteTodolist} className={s.deleteBtn}>Delete</div>
+                <div onClick={this.props.deleteTodolist} className={s.footerBtns}>Delete</div>
             </div>);
     }
 }

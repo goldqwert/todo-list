@@ -107,9 +107,9 @@ class TodoListTask extends React.Component<IProps> {
 
     render = () => {
         const classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
-        let startDate = dateFormat(this.props.task.startDate, 'fullDate');
-        let deadline = dateFormat(this.props.task.deadline, 'fullDate');
-        let addedDate = dateFormat(this.props.task.addedDate, 'fullDate');
+        let startDate = dateFormat(this.props.task.startDate, 'longDate');
+        let deadline = dateFormat(this.props.task.deadline, 'longDate');
+        let addedDate = dateFormat(this.props.task.addedDate, 'longDate');
         let priority = ''
         switch (this.props.task.priority) {
             case 0: priority = 'Low'; break;
@@ -134,15 +134,16 @@ class TodoListTask extends React.Component<IProps> {
                             <label>Created by: <input type='date' onChange={this.changeStartDate} /></label>
                             <div>Deadline: <input type='date' onChange={this.changeDeadline} /></div>
                             <button onClick={this.deactivateEditMode}>Save</button></>
-                        : <div className={s.borderForWord}><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
-                            <input onChange={this.onChangeStatus} type='checkbox' checked={this.props.task.status} />
-                            <span className={s.border}>{this.props.task.title}</span>
-                            <button onClick={this.activateEditMode}>Edit</button>
-                            <div>{this.props.task.description}</div>
-                            <div>{startDate}</div>
-                            <div>{deadline}</div>
-                            <div>{addedDate}</div>
-                            <div>priority: {priority}</div>
+                        : <div className={s.borderForWord}>
+                            <div><button onClick={this.deleteTask} className={s.deleteBtn}>X</button>
+                                <input onChange={this.onChangeStatus} type='checkbox' checked={this.props.task.status} />
+                                <span className={s.border}>{this.props.task.title}</span>
+                                <button onClick={this.activateEditMode}></button></div>
+                            <p>Description: <span>{this.props.task.description}</span></p>
+                            <p>Start date: <span>{startDate}</span></p>
+                            <p>Deadline: <span>{deadline}</span></p>
+                            <p>Added date: <span>{addedDate}</span></p>
+                            <p>Priority: <span>{priority}</span></p>
                         </div>}
                     <hr />
                 </div>

@@ -85,13 +85,13 @@ class TodoList extends React.Component<IProps> {
         return (
             <div className={s.todoWrapper}>
                 <div className={s.todolist}>
-                    <div className={s.todoListheader}>
+                    <div className={s.todoListHeader}>
                         <TodoListTitle title={this.props.title}
                             changeHeaderTitleTC={this.changeHeaderTitleTC}
                             id={this.props.id} />
                         <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='new task' />
                     </div>
-                    <div className={s.tasksFooter}>
+                    <div className={s.todoListMain}>
                         <TodoListTasks changeStatus={this.changeStatus}
                             changeTitle={this.changeTitle}
                             changePriority={this.changePriority}

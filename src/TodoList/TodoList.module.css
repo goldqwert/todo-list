@@ -2,11 +2,11 @@
 padding: 20px;
 }
 
-.tasksFooter {
+.todoListMain {
     padding: 20px;
     margin-top: 20px;
     background-color: #fffafa;
-    border-radius: 0 0 6px 6px;
+    border-radius: 6px;
 }
   
   
