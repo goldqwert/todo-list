@@ -1,6 +1,5 @@
 .tasks {
-    background-color: #fbf8f8;
-    border-radius: 6px;
+    border-bottom: 2px solid #b6b6ff;
 }
 
 .task {
@@ -19,6 +18,8 @@
     font-weight: bold;
     display: flex;
     justify-content: center;
+    text-align: center;
+    margin: 10px;
 }
 
 .tasksBlock::-webkit-scrollbar-thumb {
@@ -34,10 +35,18 @@
       
 .tasksBlock {
     overflow-y: scroll;
-    max-height: 220px;
+    max-height: 231px;
     background-color: #fbf8f8; 
     border-radius: 8px;
     margin-bottom: 15px;
+}
+
+.taskButtons {
+    display: flex;
+}
+
+.taskCheckbox {
+    cursor: pointer;
 }
 
 .element {
@@ -50,7 +59,7 @@
     resize: none;
     cursor: pointer;
 }
-  
+
 .deleteBtn {
     color: #fffafa;
     background: #c72800;
@@ -64,10 +73,17 @@
     margin: 5px;
 }
 
+.borderForSVG {
+    width: 20px;
+    height: 20px; 
+}
+
 p > span {
     color: #636363;
 }
 
-svg {
-    margin-right: 5px;
+svg:hover {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
 }
