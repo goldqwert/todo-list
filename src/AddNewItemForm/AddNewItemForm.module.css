@@ -1,62 +1,40 @@
-/* 
-.addNewTodo {
+.addNewTask {
   display: flex;
-  
-} */
-
-.addNewTask, .addNewTodo {
-  min-width: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-grow: 1;
   border-radius: 6px 0 0 6px;
 }
-  
+
+.addNewTodo {
+  display: flex;
+  border-radius: 6px 0 0 6px;
+}
+
 .addNewTask.error, .addNewTodo.error  {
-      border: 3px solid red;
+  border: 3px solid red;
+  border-radius: 6px;
 }
   
 .addNewTask input, .addNewTodo input {
-    height: 26px;
-    font: 500 16px 'Roboto';
-    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
-    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
-    border: none;
-    padding: 7px;
-    outline: none;
+  height: 26px;
+  font: 500 16px 'Roboto';
+  box-shadow: 0px 0px 0px rgba(66,66,66,.75);
+  text-shadow: 0px 0px 5px rgba(66,66,66,.75);
+  border: none;
+  padding: 7px;
+  outline: none;
 }
   
 .addNewTask button, .addNewTodo button {
-    height: 40px;
-    color: blue;
-    font: 500 20px 'Roboto';
-    box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
-    text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
-    border: none;
-    background-color: white;
-    border-radius: 0 6px 6px 0;
-    outline: none;
+  height: 40px;
+  color: blue;
+  font: 500 20px 'Roboto';
+  box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
+  text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
+  border: none;
+  background-color: white;
+  border-radius: 0 6px 6px 0;
+  outline: none;
 }
-  
-/* .addNewTodo input{
-    height: 34px;
-    font: 500 21.4px 'Roboto';
-    box-shadow: 0px 0px 0px rgba(66,66,66,.75);
-    text-shadow: 0px 0px 5px rgba(66,66,66,.75);
-    border: none;
-    outline: none;
-} */
-/*   
-.addNewTodo button {
-    height: 36px;
-    color: blue;
-    font: 500 20px 'Roboto';
-    box-shadow: 0px 0px 0px rgba(48, 40, 158, 0.75);
-    text-shadow: 0px 0px 5px rgba(48, 40, 158, 0.75);
-    border: none;
-    background-color: white;
-    outline: none;
-} */
-  
+
   
   

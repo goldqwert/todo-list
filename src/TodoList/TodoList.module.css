@@ -1,12 +1,11 @@
 .todoWrapper {
 padding: 20px;
+width: 320px;
 }
 
 .todoListMain {
     padding: 20px;
     margin-top: 20px;
-    background-color: #fffafa;
+    background-color: #b6b6ff;
     border-radius: 6px;
 }
-  
-  

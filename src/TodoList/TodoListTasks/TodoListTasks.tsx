@@ -1,5 +1,5 @@
 import React from 'react';
-// import s from './TodoListTasks.module.css';
+import s from './TodoListTask/TodoListTask.module.css';
 import TodoListTask from './TodoListTask/TodoListTask';
 
 interface IProps {
@@ -23,7 +23,7 @@ class TodoListTasks extends React.Component<IProps> {
         })
 
         return (
-            <div>
+            <div className={s.tasksBlock}>
                 {tasksElement}
             </div>
         );
