@@ -9,9 +9,9 @@
   border-radius: 6px 0 0 6px;
 }
 
-.addNewTask.error, .addNewTodo.error  {
-  border: 3px solid red;
-  border-radius: 6px;
+.addNewTask.error input, .addNewTask.error button, .addNewTodo.error input, .addNewTodo.error button{
+  background-color: #bd4747;
+  color: #b6b6ff;
 }
   
 .addNewTask input, .addNewTodo input {

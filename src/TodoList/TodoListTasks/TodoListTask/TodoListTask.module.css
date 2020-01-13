@@ -49,6 +49,34 @@
     cursor: pointer;
 }
 
+.taskChangeElement {
+    display: flex;
+    width: 200px;
+    border: 1px solid #856aff;
+    border-radius: 6px;
+    resize: none;
+    padding: 3px;
+}
+
+.taskSelectPriority {
+    border: 1px solid #856aff;
+    border-radius: 6px;
+    width: 208px;
+}
+
+.taskInfoBtnSave {
+    border: 1px solid #856aff;
+    background-color: #b6b6ff;
+    border-radius: 6px;
+    margin-top: 5px;
+    cursor: pointer;
+    font: 16px 'Roboto';
+}
+
+.taskInfoBtnSave:hover {
+    background-color: #856aff;
+}
+
 .element {
     background-color: transparent;
     outline: none;

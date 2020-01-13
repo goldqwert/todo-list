@@ -8,6 +8,35 @@ border-bottom: 5px solid #F5F5DC;
 color: #F5F5DC;
 }
 
+.appError {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+    color: #F5F5DC;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.appBtnComeBack {
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 6px;
+    outline: none;
+    border: 2px solid #F5F5DC;
+    background-color: #5050e6;
+    color: #F5F5DC;
+    font: 600 20px 'Roboto';
+}
+
+.appBtnComeBack:hover {
+    background-color:#856aff;
+    color: #151414;
+}
+
 .todoWrapper {
 display: flex;
 flex-direction: row;

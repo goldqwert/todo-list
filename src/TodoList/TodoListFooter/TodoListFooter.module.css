@@ -13,5 +13,14 @@
 }
 
 .footerBtns:hover {
-border-bottom: 3px solid #856aff;
+    border-bottom: 3px solid #856aff;
+}
+
+.deleteTodo:hover {
+    border-bottom: 3px solid #c30202;
+}
+
+.deleteTodo {
+    cursor: pointer;
+    color: #c30202;
 }

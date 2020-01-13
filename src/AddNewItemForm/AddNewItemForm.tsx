@@ -54,7 +54,7 @@ class AddNewItemForm extends React.Component<IProps> {
             (this.props.style === 'addNewTodo') ? `${s.addNewTodo}` : ''
         const classForError = this.state.error === true ? `${s.error} ${classForInput}` : `${classForInput}`;
         return (
-            <div className={classForError}>
+            <div><div className={classForError}>
                 <div className={classForInput}>
                     <input type='text' placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
                         className={classForInput}
@@ -62,6 +62,7 @@ class AddNewItemForm extends React.Component<IProps> {
                         onChange={this.changeValueTitle} />
                     <button onClick={this.onAddItemButtonClick}>ADD</button>
                 </div>
+            </div>
             </div>
         );
     }

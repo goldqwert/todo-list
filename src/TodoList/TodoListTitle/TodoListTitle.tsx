@@ -10,7 +10,8 @@ class TodoListTitle extends React.Component<IProps> {
 
     state = {
         editMode: false,
-        title: this.props.title
+        title: this.props.title,
+        error: false
     }
 
     activateEditMode = () => {
@@ -20,27 +21,44 @@ class TodoListTitle extends React.Component<IProps> {
     }
 
     deactivateEditMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.changeHeaderTitleTC(this.state.title)
+        let newText = this.state.title;
+        if (newText === '') {
+            this.setState({
+                error: true
+            })
+        } else {
+            this.setState({
+                error: false,
+                title: '',
+                editMode: false
+            })
+            this.props.changeHeaderTitleTC(newText)
+        }
     }
 
     changeHeader = (e: React.FormEvent<HTMLInputElement>) => {
-        this.setState({
-            title: e.currentTarget.value
-        })
+        if (e.currentTarget.value.length > 55) {
+            this.setState({
+                error: true
+            })
+        } else {
+            this.setState({
+                title: e.currentTarget.value,
+                error: false
+            })
+        }
     }
+
     render = () => {
         return (<div>
 
             <div>{this.state.editMode
                 ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
                     className={s.element} />
-                : <h3 onClick={this.activateEditMode} className={s.titleSize}>{this.props.title}</h3>
+                : <h3 onDoubleClick={this.activateEditMode} className={s.titleSize}>{this.props.title}</h3>
             }</div>
         </div>);
     }
-}
 
+}
 export default TodoListTitle;

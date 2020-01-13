@@ -46,9 +46,10 @@ class App extends React.Component<AppProps> {
                         {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                     </div>
                 </div>
-                : <div className={s.todo}>
-                    Maximum count of Todo lists count is 10
-                        <button onClick={this.showTodolists}>Come back</button>
+                : <div className={s.appError}>
+                    The maximum number of to-do lists is not more than 10,
+                         and tasks in the to-do list are not more than 100
+                    <button className={s.appBtnComeBack} onClick={this.showTodolists}>Come back</button>
                 </div>}
         </div>);
     }

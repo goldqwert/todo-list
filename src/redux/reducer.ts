@@ -132,7 +132,6 @@ const changeTaskAC = (taskId: string, obj: IChangeTask, todolistId: string): cha
 const changeHeaderAC = (todolistId: string, title: any): changeHeader => ({ type: CHANGE_HEADER, todolistId, title })
 const deleteTodolistAC = (todolistId: string): deleteTodolist => ({ type: DETELE_TODOLIST, todolistId })
 const deleteTaskAC = (taskId: string, todolistId: string): deleteTask => ({ type: DELETE_TASK, taskId, todolistId })
-// const changePriorityAC = (priority: number): changePriority => ({})
 const showErrorAC = (): showError => ({ type: SHOW_ERROR })
 export const showTodolistsAC = (): showTodolists => ({ type: SHOW_TODOLISTS })
 
@@ -145,7 +144,6 @@ export const getTodolistsTC = () => {
 export const addTodolistTC = (title: string) => {
     return async (dispatch: Dispatch<ActionCreatorTypes>) => {
         const res = await api.addTodolist(title)
-        console.log(res)
         let newTodolist = res.data.data.item
         if (res.data.resultCode === 1) {
             dispatch(showErrorAC())
@@ -156,7 +154,6 @@ export const addTodolistTC = (title: string) => {
 }
 
 export const getTasksTC = (todolistId: string) => {
-    debugger
     return async (dispatch: Dispatch<ActionCreatorTypes>) => {
         const res = await api.getTasks(todolistId)
         let tasks = res.data.items
@@ -168,7 +165,11 @@ export const addTaskTC = (todolistId: string, title: string) => {
     return async (dispatch: Dispatch<ActionCreatorTypes>) => {
         const res = await api.addTask(todolistId, title)
         let newTask = res.data.data.item
-        dispatch(addTaskAC(newTask, todolistId))
+        if(res.data.resultCode === 1) {
+            dispatch(showErrorAC())
+        } else {
+            dispatch(addTaskAC(newTask, todolistId))
+        }
     }
 }
 
