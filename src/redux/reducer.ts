@@ -165,7 +165,7 @@ export const addTaskTC = (todolistId: string, title: string) => {
     return async (dispatch: Dispatch<ActionCreatorTypes>) => {
         const res = await api.addTask(todolistId, title)
         let newTask = res.data.data.item
-        if(res.data.resultCode === 1) {
+        if (res.data.resultCode === 1) {
             dispatch(showErrorAC())
         } else {
             dispatch(addTaskAC(newTask, todolistId))
@@ -179,7 +179,7 @@ export const changeTaskTC = (taskId: string, obj: any, todolistId: string) => {
         selectedTodo.tasks.forEach(async (el: Task) => {
             if (el.id === taskId) {
                 const newTask = { ...el, ...obj }
-                const res = await api.changeTask(newTask)
+                const res = await api.changeTask(todolistId, taskId, newTask)
                 dispatch(changeTaskAC(taskId, obj, todolistId))
             }
         })
@@ -202,7 +202,7 @@ export const deleteTodolistTC = (todolistId: string) => {
 
 export const deleteTaskTC = (taskId: string, todolistId: string) => {
     return async (dispatch: Dispatch<ActionCreatorTypes>) => {
-        const res = await api.deleteTask(taskId)
+        const res = await api.deleteTask(todolistId, taskId)
         dispatch(deleteTaskAC(taskId, todolistId))
     }
 }
