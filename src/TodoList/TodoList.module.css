@@ -1,11 +1,17 @@
 .todoWrapper {
-padding: 20px;
-width: 320px;
+    padding: 20px;
+    width: 320px;
 }
 
-.todoListMain {
+.todoMain {
     padding: 20px;
     margin-top: 20px;
     background-color: #b6b6ff;
     border-radius: 6px;
+}
+
+@media (max-width: 320px) {
+    .todoWrapper {
+        width: 275px;
+    }
 }

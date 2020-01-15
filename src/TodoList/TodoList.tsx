@@ -84,35 +84,33 @@ class TodoList extends React.Component<IProps> {
         let { tasks = [] } = this.props
         return (
             <div className={s.todoWrapper}>
-                <div className={s.todolist}>
-                    <div className={s.todoListHeader}>
-                        <TodoListTitle title={this.props.title}
-                            changeHeaderTitleTC={this.changeHeaderTitleTC}
-                            id={this.props.id} />
-                        <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='new task' />
-                    </div>
-                    <div className={s.todoListMain}>
-                        <TodoListTasks changeStatus={this.changeStatus}
-                            changeTitle={this.changeTitle}
-                            changePriority={this.changePriority}
-                            changeDescription={this.changeDescription}
-                            changeStartDate={this.changeStartDate}
-                            changeDeadline={this.changeDeadline}
-                            deleteTask={this.deleteTaskTC}
-                            tasks={tasks.filter(t => {
-                                if (this.state.filterValue === "All") {
-                                    return true;
-                                }
-                                if (this.state.filterValue === "Active") {
-                                    return t.status === 0;
-                                }
-                                if (this.state.filterValue === "Completed") {
-                                    return t.status === 2;
-                                }
-                            })} />
-                        <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}
-                            deleteTodolist={this.deleteTodolist} />
-                    </div>
+                <div>
+                    <TodoListTitle title={this.props.title}
+                        changeHeaderTitleTC={this.changeHeaderTitleTC}
+                        id={this.props.id} />
+                    <AddNewItemForm addItem={this.addItem} style='addNewTask' placeholder='new task' />
+                </div>
+                <div className={s.todoMain}>
+                    <TodoListTasks changeStatus={this.changeStatus}
+                        changeTitle={this.changeTitle}
+                        changePriority={this.changePriority}
+                        changeDescription={this.changeDescription}
+                        changeStartDate={this.changeStartDate}
+                        changeDeadline={this.changeDeadline}
+                        deleteTask={this.deleteTaskTC}
+                        tasks={tasks.filter(t => {
+                            if (this.state.filterValue === "All") {
+                                return true;
+                            }
+                            if (this.state.filterValue === "Active") {
+                                return t.status === 0;
+                            }
+                            if (this.state.filterValue === "Completed") {
+                                return t.status === 2;
+                            }
+                        })} />
+                    <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}
+                        deleteTodolist={this.deleteTodolist} />
                 </div>
             </div>
         );

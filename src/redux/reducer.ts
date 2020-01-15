@@ -125,7 +125,7 @@ const reducer = (state: State = initialState, action: ActionCreatorTypes) => {
 export default reducer;
 
 const setTodolistsAC = (todolists: Todolist[]): setTodolists => ({ type: SET_TODOLISTS, todolists })
-const addTodolistAC = (newTodolist: Todolist[]): addTodolist => ({ type: ADD_TODOLIST, newTodolist })
+const addTodolistAC = (newTodolist: Todolist): addTodolist => ({ type: ADD_TODOLIST, newTodolist })
 const setTasksAC = (tasks: Task[], todolistId: string): setTasks => ({ type: SET_TASKS, tasks, todolistId })
 const addTaskAC = (newTask: string, todolistId: string): addTask => ({ type: ADD_TASK, newTask, todolistId })
 const changeTaskAC = (taskId: string, obj: IChangeTask, todolistId: string): changeTask => ({ type: CHANGE_TASK, taskId, obj, todolistId })

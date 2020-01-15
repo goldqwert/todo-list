@@ -17,10 +17,9 @@ export const api = {
         return instance.get(`/${todolistId}/tasks`)
     },
     addTask(todolistId: string, title: string) {
-        return instance.post(`/${todolistId}/tasks`,
-            { title })
+        return instance.post(`/${todolistId}/tasks`, { title })
     },
-    changeTask(todolistId: string, taskId: string, newTask: string, ) {
+    changeTask(todolistId: string, taskId: string, newTask: newTask) {
         return instance.put(`/${todolistId}/tasks/${taskId}`, newTask)
     },
     deleteTodolist(todolistId: string) {

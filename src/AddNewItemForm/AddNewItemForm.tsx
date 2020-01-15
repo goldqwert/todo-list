@@ -1,14 +1,11 @@
 import React from 'react';
 import s from './AddNewItemForm.module.css';
-
 interface IProps {
     addItem: (newText: string) => void
     style: string
     placeholder: string
 }
-
 class AddNewItemForm extends React.Component<IProps> {
-
     state = {
         error: false,
         title: ''
@@ -27,7 +24,6 @@ class AddNewItemForm extends React.Component<IProps> {
             })
             this.props.addItem(newText);
         }
-
     }
 
     changeOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,18 +49,15 @@ class AddNewItemForm extends React.Component<IProps> {
         const classForInput = (this.props.style === 'addNewTask') ? `${s.addNewTask}` :
             (this.props.style === 'addNewTodo') ? `${s.addNewTodo}` : ''
         const classForError = this.state.error === true ? `${s.error} ${classForInput}` : `${classForInput}`;
-        return (
-            <div><div className={classForError}>
-                <div className={classForInput}>
-                    <input type='text' placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
-                        className={classForInput}
-                        value={this.state.title}
-                        onChange={this.changeValueTitle} />
-                    <button onClick={this.onAddItemButtonClick}>ADD</button>
-                </div>
+        return (<div className={classForError}>
+            <div className={classForInput}>
+                <input type='text' placeholder={this.props.placeholder} onKeyPress={this.changeOnKeyPress}
+                    className={classForInput}
+                    value={this.state.title}
+                    onChange={this.changeValueTitle} />
+                <button onClick={this.onAddItemButtonClick}>ADD</button>
             </div>
-            </div>
-        );
+        </div>);
     }
 }
 

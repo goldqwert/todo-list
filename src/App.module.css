@@ -1,11 +1,11 @@
 .appHeader {
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 180px;
-border-bottom: 5px solid #F5F5DC;
-color: #F5F5DC;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 180px;
+    border-bottom: 5px solid #F5F5DC;
+    color: #F5F5DC;
 }
 
 .appError {
@@ -37,16 +37,12 @@ color: #F5F5DC;
     color: #151414;
 }
 
-.todoWrapper {
-display: flex;
-flex-direction: row;
-justify-content: center;
-flex-wrap: wrap;
-margin: 0 auto;
-}
-
-.todo {
-    background-color: #F5F5DC;
+.appTodoWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 

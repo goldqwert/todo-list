@@ -42,7 +42,7 @@ class App extends React.Component<AppProps> {
                 ? <div>
                     <div className={s.appHeader}><h1>To-do list app</h1>
                         <AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='new to-do list' /></div>
-                    <div className={s.todoWrapper}>
+                    <div className={s.appTodoWrapper}>
                         {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
                     </div>
                 </div>
@@ -54,7 +54,6 @@ class App extends React.Component<AppProps> {
         </div>);
     }
 }
-
 
 const mapStateToProps = (state: State): mapStateToProps => {
     return {

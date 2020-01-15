@@ -6,7 +6,7 @@
   text-align: center;
 }
    
-.element {
+.titleElement {
     background-color: transparent;
     outline: none;
     border: none;
@@ -26,4 +26,10 @@
     outline: none;
     cursor: pointer;
   }
+
+@media (max-width: 320px) {
+    .titleSize {
+      width: 275px;
+    }
+}
   

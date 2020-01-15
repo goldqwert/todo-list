@@ -1,6 +1,5 @@
 import React from 'react';
 import s from './TodoListTitle.module.css';
-
 interface IProps {
     title: string
     id: string
@@ -51,10 +50,9 @@ class TodoListTitle extends React.Component<IProps> {
 
     render = () => {
         return (<div>
-
             <div>{this.state.editMode
                 ? <input onChange={this.changeHeader} autoFocus={true} onBlur={this.deactivateEditMode} value={this.state.title}
-                    className={s.element} />
+                    className={s.titleElement} />
                 : <h3 onDoubleClick={this.activateEditMode} className={s.titleSize}>{this.props.title}</h3>
             }</div>
         </div>);

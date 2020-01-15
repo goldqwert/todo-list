@@ -28,7 +28,19 @@ interface IChangeTask {
     startDate?: string
     deadline?: string
 }
-
 interface IChangeTitle {
-    title: string
+    title?: string
+}
+interface newTask {
+    status: number;
+    title: string;
+    priority: number;
+    description: string | null;
+    startDate: string | null;
+    deadline: string | null;
+    addedDate: string;
+    order: number;
+    todolistId: string;
+    id: string;
+    completed: boolean;
 }

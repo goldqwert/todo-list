@@ -73,9 +73,9 @@ class TodoListTask extends React.Component<IProps> {
     }
 
     render = () => {
-        const classForTasks = this.props.task.status ? `${s.task} ${s.done}` : `${s.task}`;
+        const classForTasks = this.props.task.status ? `${s.taskBlock} ${s.done}` : `${s.taskBlock}`;
         return (
-            <div className={s.tasks}>
+            <div className={s.taskWrapper}>
                 <div className={classForTasks}>
                     {this.state.editMode
                         ? <TodoListTaskFormEdit onTitleChanged={this.onTitleChanged} onDescriptionChanged={this.onDescriptionChanged}
