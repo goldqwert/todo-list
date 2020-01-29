@@ -71,9 +71,8 @@ class TodoList extends React.Component<IProps> {
     }
 
     deleteTodolist = () => {
-        if (window.confirm('Are you sure you want to delete this to-do list?')) {
-            this.props.deleteTodolistTC(this.props.id)
-        }
+        // if (window.confirm('Are you sure you want to delete this to-do list?')) {
+        this.props.deleteTodolistTC(this.props.id)
     }
 
     deleteTaskTC = (taskId: string) => {
