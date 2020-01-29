@@ -3,7 +3,7 @@ import axios from 'axios'
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/todo-lists',
     withCredentials: true,
-    headers: { 'API-KEY': 'd9c16d66-ba42-42bd-b62f-4ee659edaf4c' }
+    headers: { 'API-KEY': '715da3e8-af92-47f7-b93a-06f3404c1715' }
 });
 
 export const api = {
