@@ -17,7 +17,7 @@ interface IProps {
 
 }
 interface mapStateToProps {
-    todolists: any[]
+    todolists: Todolist[]
     error: boolean
     isAuth: boolean
     userId: number

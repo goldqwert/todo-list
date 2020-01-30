@@ -6,6 +6,7 @@ interface IProps {
     placeholder: string
 }
 class AddNewItemForm extends React.Component<IProps> {
+
     state = {
         error: false,
         title: ''
@@ -44,7 +45,6 @@ class AddNewItemForm extends React.Component<IProps> {
             })
         }
     }
-
     render = () => {
         const classForInput = (this.props.style === 'addNewTask') ? `${s.addNewTask}` :
             (this.props.style === 'addNewTodo') ? `${s.addNewTodo}` : ''

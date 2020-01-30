@@ -10,7 +10,7 @@ interface IProps {
     changeStartDate: (id: string, startDate: string) => void
     changeDeadline: (id: string, deadline: string) => void
     deleteTask: (id: string) => void
-    tasks: any;
+    tasks: Task[];
 }
 class TodoListTasks extends React.Component<IProps> {
     render = () => {

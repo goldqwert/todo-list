@@ -17,8 +17,21 @@ interface Todolist {
     title: string
 }
 interface State {
-    todolists: Todolist[]
+    app: App
+    auth: Auth
+}
+interface AppState {
+    todolists: any[],
     error: boolean
+}
+interface AuthState {
+    userId: null | number,
+    email: null | string,
+    login: null | string,
+    isAuth: boolean,
+    captchaUrl: null | any,
+    formError: string,
+    initialize: boolean
 }
 interface IChangeTask {
     status?: number
