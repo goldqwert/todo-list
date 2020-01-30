@@ -1,7 +1,7 @@
 import {
     SET_TODOLISTS, ADD_TODOLIST, SET_TASKS, ADD_TASK, CHANGE_TASK, CHANGE_HEADER, DETELE_TODOLIST, DELETE_TASK,
     SHOW_ERROR, SHOW_TODOLISTS
-} from './reducer'
+} from './TodoListsReducer'
 export interface setTodolists {
     type: typeof SET_TODOLISTS
     todolists: Todolist[]

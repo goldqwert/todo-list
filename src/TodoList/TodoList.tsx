@@ -5,7 +5,7 @@ import AddNewItemForm from '../AddNewItemForm/AddNewItemForm';
 import TodoListTasks from './TodoListTasks/TodoListTasks';
 import TodoListFooter from './TodoListFooter/TodoListFooter';
 import { connect } from 'react-redux';
-import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from '../redux/reducer';
+import { getTasksTC, addTaskTC, changeTaskTC, deleteTodolistTC, deleteTaskTC, changeHeaderTC } from '../redux/TodoListsReducer';
 
 interface IProps {
     id: string

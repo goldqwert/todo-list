@@ -1,66 +1,15 @@
 import React from 'react';
-import s from './App.module.css';
-import TodoList from './TodoList/TodoList';
-import AddNewItemForm from './AddNewItemForm/AddNewItemForm'
-import { connect } from 'react-redux';
-import { getTodolistsTC, addTodolistTC, showTodolistsAC } from './redux/reducer';
+import { Route } from 'react-router-dom';
+import Login from './Login/Login'
+import Main from './Main'
 
-interface IProps {
-    getTodolistsTC: () => void
-    addTodolistTC: (title: string) => void
-    showTodolistsAC: () => void
-}
-interface mapStateToProps {
-    todolists: any[],
-    error: boolean
-}
-
-type AppProps = IProps & mapStateToProps
-class App extends React.Component<AppProps> {
-
-    componentDidMount() {
-        this.props.getTodolistsTC()
-    }
-
-    nextTodoListId = 0;
-
-    state = {
-        todolists: []
-    }
-
-    onAddTodoListClick = (title: string) => {
-        this.props.addTodolistTC(title)
-    }
-
-    showTodolists = () => {
-        this.props.showTodolistsAC()
-    }
-
+class App extends React.Component {
     render = () => {
-        return (<div className={s.appWrapper}>
-            {!this.props.error
-                ? <div>
-                    <div className={s.appHeader}><h1>To-do list app</h1>
-                        <AddNewItemForm addItem={this.onAddTodoListClick} style='addNewTodo' placeholder='new to-do list' /></div>
-                    <div className={s.appTodoWrapper}>
-                        {this.props.todolists.map((el) => <TodoList key={el.id} id={el.id} title={el.title} tasks={el.tasks} />)}
-                    </div>
-                </div>
-                : <div className={s.appError}>
-                    The maximum number of to-do lists is not more than 10,
-                         and tasks in the to-do list are not more than 100
-                    <button className={s.appBtnComeBack} onClick={this.showTodolists}>Come back</button>
-                </div>}
+        return (<div>
+            <Route path='/login' component={Login} />
+            <Route exact path='/' component={Main} />
         </div>);
     }
 }
 
-const mapStateToProps = (state: State): mapStateToProps => {
-    return {
-        todolists: state.todolists,
-        error: state.error
-    }
-}
-
-const ConnectedApp = connect(mapStateToProps, { getTodolistsTC, addTodolistTC, showTodolistsAC })(App);
-export default ConnectedApp;
+export default App;
